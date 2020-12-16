@@ -1,0 +1,18 @@
+.card {
+    background: transparent!important;
+}
+
+.card-body {
+    padding: 5px 0 0 0!important;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: bold!important;
+    margin: unset!important;
+}
+
+.card-text {
+    color: #B3B3B3;
+}
+
