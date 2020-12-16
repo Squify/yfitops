@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Homepage from "./views/homepage";
+import React, {Component} from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Menu from "./views/menu";
+import {Col, Row} from "react-bootstrap";
+import Playlist from "./views/playlist";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+    render() {
+        return <BrowserRouter>
+            <div className="container-fluid">
+                <Row>
+                    <Col xs={2} id="sidebar-wrapper">
+                        <Menu/>
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">
+                        <Route exact path="/homepage" component={Homepage}/>
+                        <Route exact path="/playlist1" component={Playlist}/>
+                    </Col>
+                </Row>
+            </div>
+        </BrowserRouter>
+    }
 }
-
-export default App;
