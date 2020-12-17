@@ -1,0 +1,40 @@
+.form-control {
+    color: #FFFFFF;
+    border-color: #474747;
+    background-color: #282828;
+}
+
+.form-control:focus {
+    color: #FFFFFF;
+    border-color: #6e6e6e;
+    background-color: #404040;
+}
+
+#thumbnail {
+    display: none;
+}
+
+.custom-input {
+    border: 1px solid #474747;
+    background-color: #282828;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.custom-input svg {
+    width: 20px;
+    height: 20px;
+}
+
+.button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.btn svg {
+    width: 30px;
+    height: 30px;
+}

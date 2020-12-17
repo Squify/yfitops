@@ -14,7 +14,7 @@ class Menu extends Component {
                 </Navbar.Brand>
                 <Nav className="mr-auto test">
                     <NavLink to={'/homepage'} className="nav-link"><HiHome/> Accueil</NavLink>
-                    <NavLink to={'/test'} className="nav-link"><HiUser/> Profil</NavLink>
+                    <NavLink to={'/profile'} className="nav-link"><HiUser/> Profil</NavLink>
                     <Nav.Item href="#10">Playlists publiques</Nav.Item>
                     <NavLink to={'/playlist1'} className="nav-link">Playlist 1</NavLink>
                     <NavLink to={'/playlist2'} className="nav-link">Playlist 2</NavLink>

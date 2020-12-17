@@ -5,6 +5,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Menu from "./views/menu";
 import {Col, Row} from "react-bootstrap";
 import Playlist from "./views/playlist";
+import Profile from "./views/profile/profile";
 
 export default class App extends Component {
 
@@ -17,6 +18,7 @@ export default class App extends Component {
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
                         <Route exact path="/homepage" component={Homepage}/>
+                        <Route exact path="/profile" component={Profile}/>
                         <Route exact path="/playlist1" component={Playlist}/>
                     </Col>
                 </Row>
