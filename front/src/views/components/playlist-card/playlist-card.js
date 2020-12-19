@@ -3,13 +3,23 @@ import {Card} from 'react-bootstrap';
 import './playlist-card.css'
 
 export default class PlaylistCard extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Card style={{ width: '18rem', border: 0, margin: 10 }}>
-                <Card.Img variant="top" src="images/playlist-default.png" />
+                {
+                    this.props.image ?
+                        <Card.Img className={"cover-image"} variant="top" src={`images/${this.props.image}`} />
+                        :
+                        <Card.Img className={"cover-image"} variant="top" src='images/playlist-default.png' />
+                }
                 <Card.Body>
-                    <Card.Title>Playlist trop stylax</Card.Title>
-                    <Card.Text>Artiste éventuellement</Card.Text>
+                    <Card.Title>{this.props.name}</Card.Title>
+                    <Card.Text>Nombre d'écoute : {this.props.listening}</Card.Text>
                 </Card.Body>
             </Card>
         );
