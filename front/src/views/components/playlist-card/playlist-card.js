@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Card} from 'react-bootstrap';
-import '../../style/playlist-card.css'
+import './playlist-card.css'
 
 export default class PlaylistCard extends Component {
     render() {

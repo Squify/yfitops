@@ -1,5 +1,6 @@
+import './edit-profile.css'
+
 import React, {Component} from 'react';
-import '../../style/edit-profile.css'
 import {Col, Row} from "react-bootstrap";
 import { HiPhotograph, HiOutlineCheckCircle } from "react-icons/hi";
 
