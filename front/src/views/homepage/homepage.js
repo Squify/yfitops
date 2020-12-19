@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import PlaylistCard from "../components/playlist-card/playlist-card";
 import './homepage.css'
+import PlaylistService from "../../services/playlist.service";
 
 export default class Homepage extends Component {
+
+    constructor(props) {
+        super(props);
+        const playlists = PlaylistService.getPlaylist();
+        this.state = ({
+            recentPlaylists: playlists.slice(0, 8),
+            popularPlaylists: playlists.sort((a, b) => b.listening - a.listening).slice(0, 5),
+        });
+    }
 
     render() {
         return (
@@ -10,21 +20,29 @@ export default class Homepage extends Component {
                 <h4>Récemment écoutées</h4>
                 <hr className="hr"/>
                 <div className="row homepage-playlist-container">
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
+                    {
+                        this.state.recentPlaylists ?
+                            this.state.recentPlaylists.map(function (playlist, i) {
+                                return <PlaylistCard name={playlist.name} listening={playlist.listening}
+                                                     image={playlist.image_path} className="col-4"/>
+                            })
+                            :
+                            null
+                    }
                 </div>
 
                 <h4>Playlists populaires</h4>
                 <hr className="hr"/>
                 <div className="row">
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
-                    <PlaylistCard className="col-4"/>
+                    {
+                        this.state.popularPlaylists ?
+                            this.state.popularPlaylists.map(function (playlist, i) {
+                                return <PlaylistCard name={playlist.name} listening={playlist.listening}
+                                                     image={playlist.image_path} className="col-4"/>
+                            })
+                            :
+                            null
+                    }
                 </div>
             </div>
         );
