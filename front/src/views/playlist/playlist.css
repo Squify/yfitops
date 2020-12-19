@@ -37,3 +37,14 @@
     background-color: #282828!important;
     color: whitesmoke!important;
 }
+
+.header-buttons {
+    position: absolute;
+    bottom: 0;
+}
+
+.header-button {
+    background-color: #e1289f!important;
+    border: #c12386 !important;
+    margin-right: 15px;
+}

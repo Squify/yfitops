@@ -1,8 +1,9 @@
+import './profile.scss'
+import PlaylistCard from "../components/playlist-card/playlist-card";
+import EditProfile from "../edit-profile/edit-profile";
+
 import React, {Component} from 'react';
 import {Image, Tabs, Tab} from "react-bootstrap";
-import '../../style/profile.scss'
-import PlaylistCard from "../components/playlist-card";
-import EditProfile from "./edit-profile";
 
 export default class Profile extends Component {
     render() {

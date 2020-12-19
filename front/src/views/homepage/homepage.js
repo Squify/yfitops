@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import PlaylistCard from "./components/playlist-card";
-import '../style/homepage.css'
-
+import PlaylistCard from "../components/playlist-card/playlist-card";
+import './homepage.css'
 
 export default class Homepage extends Component {
 
