@@ -1,5 +1,5 @@
-import Server from "../src/Server";
-import Database from "../src/Database";
+import Server from "./src/Server";
+import Database from "./src/Database";
 
 const app = Server.config();
 const { APP_PORT, DB_NAME, DB_HOST, DB_PORT } = process.env;
