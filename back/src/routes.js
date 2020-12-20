@@ -1,4 +1,5 @@
-import {Router} from 'express';
+import { Router } from 'express';
+import CategoryController from './controllers/CategoryController';
 import UserController from './controllers/UserController';
 
 const router = Router();
@@ -17,6 +18,11 @@ router.delete('/users/:id', UserController.remove);
  * Routes Music
  */
 
+router.get('/categories', CategoryController.list);
+router.get('/categories/:id', CategoryController.details);
+router.post('/categories', CategoryController.store);
+router.put('/categories/:id', CategoryController.update);
+router.delete('/categories/:id', CategoryController.remove);
 
 /**
  * Routes Playlist
