@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-// import router from "./routes";
+import router from "./routes";
 // import jwt from "./config/jwt";
 // import swaggerUi from "swagger-ui-express";
 // import swaggerJsdoc from "swagger-jsdoc";
@@ -41,7 +41,7 @@ class Server {
         app.use(bodyParser.json());
         app.use(cors({ origin: true }));
 
-        // app.use('/', router);
+        app.use('/', router);
 
         return app;
     }
