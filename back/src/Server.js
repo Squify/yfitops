@@ -41,7 +41,7 @@ class Server {
         app.use(bodyParser.json());
         app.use(cors({ origin: true }));
 
-        // app.use('/', router);
+        app.use('/', router);
 
         return app;
     }
