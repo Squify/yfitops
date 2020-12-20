@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CategoryController from './controllers/CategoryController';
+import PlaylistController from './controllers/PlaylistController';
 import UserController from './controllers/UserController';
 
 const router = Router();
@@ -28,6 +29,13 @@ router.delete('/categories/:id', CategoryController.remove);
  * Routes Playlist
  */
 
+router.get('/playlists', PlaylistController.list);
+router.get('/playlists/mine', PlaylistController.listMine);
+router.get('/playlists/public', PlaylistController.listPublic);
+router.get('/playlists/:id', PlaylistController.details);
+router.post('/playlists', PlaylistController.store);
+router.put('/playlists/:id', PlaylistController.update);
+router.delete('/playlists/:id', PlaylistController.remove);
 
 /**
  * Routes Category
