@@ -36,7 +36,7 @@ export default class Playlist extends Component {
     }
 
     getPlaylist() {
-        let playlists = PlaylistService.getPlaylist();
+        let playlists = PlaylistService.getPlaylists();
         this.state = ({uri: this.props.match.params.name})
         let playlist = playlists.find(item => item.name === this.state.uri);
         if (playlist) {

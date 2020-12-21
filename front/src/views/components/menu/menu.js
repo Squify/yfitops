@@ -9,7 +9,7 @@ class Menu extends Component {
 
     constructor(props) {
         super(props);
-        const playlists = PlaylistService.getPlaylist();
+        const playlists = PlaylistService.getPlaylists();
         this.state = ({
             publicPlaylists: playlists.filter(playlist => playlist.public === true),
             privatePlaylists: playlists.filter(playlist => playlist.public === false),
