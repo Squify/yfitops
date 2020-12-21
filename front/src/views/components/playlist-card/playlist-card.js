@@ -4,10 +4,6 @@ import './playlist-card.css'
 
 export default class PlaylistCard extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Card style={{ width: '18rem', border: 0, margin: 10 }}>

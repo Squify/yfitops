@@ -6,6 +6,8 @@ import Menu from "./views/components/menu/menu";
 import {Col, Row} from "react-bootstrap";
 import Playlist from "./views/playlist/playlist";
 import Profile from "./views/profile/profile";
+import Administration from "./views/administration/administration";
+import AddMusic from "./views/administration/musics/addMusic";
 
 export default class App extends Component {
 
@@ -18,6 +20,10 @@ export default class App extends Component {
                     </Col>
                     <Col xs={10} id="page-content-wrapper">
                         <Route exact path="/" component={Homepage}/>
+
+                        <Route exact path="/admin/:page" component={Administration}/>
+                        <Route exact path="/admin/musics/add" component={AddMusic}/>
+
                         <Route exact path="/profile" component={Profile}/>
                         <Route exact path="/playlist/:name" component={Playlist}/>
                     </Col>

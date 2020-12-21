@@ -24,10 +24,12 @@ export default class Playlist extends Component {
     }
 
     async componentDidMount() {
+        window.scrollTo(0, 0);
         this.getPlaylist();
     }
 
     componentDidUpdate(prevProps) {
+        window.scrollTo(0, 0);
         if (this.props.match.params.name !== prevProps.match.params.name) {
             this.getPlaylist();
         }
@@ -62,7 +64,6 @@ export default class Playlist extends Component {
     }
 
     render() {
-        console.log(this.state.playlist.image_path)
         return (
             <div className="global-container">
                 <div className="row">

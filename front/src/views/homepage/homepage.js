@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PlaylistCard from "../components/playlist-card/playlist-card";
 import './homepage.css'
 import PlaylistService from "../../services/playlist.service";
+import {Link} from "react-router-dom";
 
 export default class Homepage extends Component {
 
@@ -23,8 +24,12 @@ export default class Homepage extends Component {
                     {
                         this.state.recentPlaylists ?
                             this.state.recentPlaylists.map(function (playlist, i) {
-                                return <PlaylistCard name={playlist.name} listening={playlist.listening}
-                                                     image={playlist.image_path} className="col-4"/>
+                                return <Link className={"playlist-card"} to={`/playlist/${playlist.name}`}
+                                             key={`recent-playlist-${playlist.id}`}>
+                                    <PlaylistCard name={playlist.name} listening={playlist.listening}
+                                                  image={playlist.image_path} className="col-4"
+                                    />
+                                </Link>
                             })
                             :
                             null
@@ -37,8 +42,12 @@ export default class Homepage extends Component {
                     {
                         this.state.popularPlaylists ?
                             this.state.popularPlaylists.map(function (playlist, i) {
-                                return <PlaylistCard name={playlist.name} listening={playlist.listening}
-                                                     image={playlist.image_path} className="col-4"/>
+                                return <Link className={"playlist-card"} to={`/playlist/${playlist.name}`}
+                                             key={`popular-playlist-${playlist.id}`}>
+                                    <PlaylistCard name={playlist.name} listening={playlist.listening}
+                                                  image={playlist.image_path} className="col-4"
+                                    />
+                                </Link>
                             })
                             :
                             null
