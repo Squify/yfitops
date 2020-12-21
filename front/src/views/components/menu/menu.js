@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Image, Nav, Navbar} from 'react-bootstrap';
-import {HiHome, HiUser} from "react-icons/hi";
+import {HiCog, HiHome, HiUser} from "react-icons/hi";
 import {NavLink} from "react-router-dom";
-import './menu.css';
+import './menu.scss';
 import PlaylistService from "../../../services/playlist.service";
 
 class Menu extends Component {
@@ -25,6 +25,7 @@ class Menu extends Component {
                 <Nav className="mr-auto test">
                     <NavLink exact to={'/'} className="nav-link"><HiHome/> Accueil</NavLink>
                     <NavLink to={'/profile'} className="nav-link"><HiUser/> Profil</NavLink>
+                    <NavLink to={'/admin/musics'} className="nav-link"><HiCog/> Administration</NavLink>
                     <hr/>
                     <div className={"playlists-container"}>
                         <Nav.Item href="#10">Playlists publiques</Nav.Item>
