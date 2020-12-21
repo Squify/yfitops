@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {Button, Table, Col, Row} from "react-bootstrap";
-import MusicService from "../../../services/music.service";
-import {HiPencil, HiTrash, HiPlusCircle} from "react-icons/hi";
+import {Button, Col, Row, Table} from "react-bootstrap";
+import {HiPencil, HiPlusCircle, HiTrash} from "react-icons/hi";
 import {Link} from "react-router-dom";
+import CategoryService from "../../../services/category.service";
 
-class Musics extends Component {
+class Categories extends Component {
 
     constructor(props) {
         super(props);
-        this.state = ({musics: MusicService.getMusics()});
+        this.state = ({categories: CategoryService.getCategories()});
     }
 
     render() {
@@ -16,10 +16,10 @@ class Musics extends Component {
             <div>
                 <Row>
                     <Col xs={10}>
-                        <h1>Musiques</h1>
+                        <h1>Catégories</h1>
                     </Col>
                     <Col>
-                        <Link to={`/admin/musics/add`}>
+                        <Link to={`/admin/categories/add`}>
                             <Button variant="dark"><HiPlusCircle/></Button>
                         </Link>
                     </Col>
@@ -29,27 +29,18 @@ class Musics extends Component {
                         <thead>
                         <tr>
                             <th className="table-header">Id</th>
-                            <th className="table-header">Titre</th>
-                            <th className="table-header">Artiste</th>
-                            <th className="table-header">Album</th>
-                            <th className="table-header">Durée</th>
-                            <th className="table-header">Path</th>
-                            <th className="table-header">Actions</th>
+                            <th className="table-header">Nom</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            this.state.musics.length > 0 ?
-                                this.state.musics.map(function (music, i) {
+                            this.state.categories.length > 0 ?
+                                this.state.categories.map(function (category, i) {
                                     return <tr className="music-tr" key={i}>
-                                        <td>{music._id}</td>
-                                        <td>{music.name}</td>
-                                        <td>{music.artiste}</td>
-                                        <td>{music.album}</td>
-                                        <td>{music.time}</td>
-                                        <td>{music.sound_path ? music.sound_path : '━'}</td>
+                                        <td>{category._id}</td>
+                                        <td>{category.name}</td>
                                         <td>
-                                            <Link to={`/admin/musics/update/${music._id}`}>
+                                            <Link to={`/admin/categories/update/${category._id}`}>
                                                 <Button style={{marginRight: 10}}
                                                         variant="dark"><HiPencil/></Button>
                                             </Link>
@@ -59,7 +50,7 @@ class Musics extends Component {
                                 })
                                 :
                                 <tr className="music-tr">
-                                    <td colSpan="5">Aucune musique à afficher pour le moment</td>
+                                    <td colSpan="5">Aucune catégorie à afficher pour le moment</td>
                                 </tr>
                         }
                         </tbody>
@@ -70,4 +61,4 @@ class Musics extends Component {
     }
 }
 
-export default Musics;
+export default Categories;

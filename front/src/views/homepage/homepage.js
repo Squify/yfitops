@@ -8,7 +8,7 @@ export default class Homepage extends Component {
 
     constructor(props) {
         super(props);
-        const playlists = PlaylistService.getPlaylist();
+        const playlists = PlaylistService.getPlaylists();
         this.state = ({
             recentPlaylists: playlists.slice(0, 8),
             popularPlaylists: playlists.sort((a, b) => b.listening - a.listening).slice(0, 5),

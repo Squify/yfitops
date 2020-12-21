@@ -2,7 +2,7 @@ import './topbar.css';
 
 import React, {Component} from 'react';
 import {Navbar, Nav} from "react-bootstrap";
-import {HiUser} from "react-icons/hi/index";
+import {HiFolder, HiDocument, HiUsers, HiViewGrid} from "react-icons/hi/index";
 import {NavLink} from "react-router-dom";
 
 class Topbar extends Component {
@@ -11,10 +11,10 @@ class Topbar extends Component {
         return (
             <Navbar className={"admin-menu"} variant="dark">
                 <Nav className="mr-auto">
-                    <NavLink to={'/admin/musics'} className="nav-link"><HiUser/> Musiques</NavLink>
-                    <NavLink to={'/admin/playlists'} className="nav-link"><HiUser/> Playlists</NavLink>
-                    <NavLink to={'/admin/users'} className="nav-link"><HiUser/> Utilisateurs</NavLink>
-                    <NavLink to={'/admin/categories'} className="nav-link"><HiUser/> Autre</NavLink>
+                    <NavLink to={'/admin/musics'} className="nav-link"><HiDocument/> Musiques</NavLink>
+                    <NavLink to={'/admin/playlists'} className="nav-link"><HiFolder/> Playlists</NavLink>
+                    <NavLink to={'/admin/users'} className="nav-link"><HiUsers/> Utilisateurs</NavLink>
+                    <NavLink to={'/admin/categories'} className="nav-link"><HiViewGrid/> Catégories</NavLink>
                 </Nav>
             </Navbar>
         );

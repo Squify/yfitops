@@ -29,7 +29,37 @@ export default class PlaylistService {
         {_id: 26, name: 'weird!', userId: null, public: false, musicsId: [1, 2, 3], image_path: 'cover1.png', listening: 11},
     ]
 
-    static getPlaylist() {
+    static nextId = 27;
+
+    static getPlaylists() {
         return this.playlists;
+    }
+
+    static getPlaylist(id) {
+        return this.playlists.find(playlist => playlist._id === parseInt(id));
+    }
+    
+    static create(formData, playlist) {
+        //TODO: Replace with api connection
+        playlist._id = this.nextId;
+        playlist.listening = 0;
+        playlist.public = Boolean(playlist.public)
+        this.nextId++;
+        this.playlists.push(playlist);
+        console.log('created')
+    }
+
+    static update(formData, playlistToUpdate) {
+        //TODO: Replace with api connection
+        playlistToUpdate.public = Boolean(playlistToUpdate.public)
+        const playlistToUpdateInArray = this.playlists.find(playlist => playlist._id === playlistToUpdate._id);
+        this.playlists[playlistToUpdateInArray._id - 1] = playlistToUpdate;
+        console.log('updated')
+    }
+
+    static delete(playlistIdToDelete) {
+        //TODO: Replace with api connection
+        this.playlists.splice(playlistIdToDelete - 1, 1)
+        console.log('delete')
     }
 }

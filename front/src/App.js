@@ -8,6 +8,11 @@ import Playlist from "./views/playlist/playlist";
 import Profile from "./views/profile/profile";
 import Administration from "./views/administration/administration";
 import AddMusic from "./views/administration/musics/addMusic";
+import UpdateMusic from "./views/administration/musics/updateMusic";
+import UpdatePlaylist from "./views/administration/playlists/updatePlaylist";
+import AddPlaylist from "./views/administration/playlists/addPlaylist";
+import AddCategory from "./views/administration/categories/addCategory";
+import UpdateCategory from "./views/administration/categories/updateCategory";
 
 export default class App extends Component {
 
@@ -23,6 +28,11 @@ export default class App extends Component {
 
                         <Route exact path="/admin/:page" component={Administration}/>
                         <Route exact path="/admin/musics/add" component={AddMusic}/>
+                        <Route exact path="/admin/musics/update/:_id" component={UpdateMusic}/>
+                        <Route exact path="/admin/playlists/add" component={AddPlaylist}/>
+                        <Route exact path="/admin/playlists/update/:_id" component={UpdatePlaylist}/>
+                        <Route exact path="/admin/categories/add" component={AddCategory}/>
+                        <Route exact path="/admin/categories/update/:_id" component={UpdateCategory}/>
 
                         <Route exact path="/profile" component={Profile}/>
                         <Route exact path="/playlist/:name" component={Playlist}/>
