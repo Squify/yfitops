@@ -4,7 +4,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes";
-// import jwt from "./config/jwt";
+import jwt from "./config/jwt";
 // import swaggerUi from "swagger-ui-express";
 // import swaggerJsdoc from "swagger-jsdoc";
 // import yamlJs from "yamljs";
@@ -13,7 +13,7 @@ import router from "./routes";
 class Server {
     static config() {
         const app = express();
-        // app.use(jwt());
+        app.use(jwt());
 
         // const swaggerDoc = swaggerJsdoc({
         //     swaggerDefinition: {
