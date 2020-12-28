@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import CategoryController from './controllers/CategoryController';
+import MusicController from './controllers/MusicController';
 import PlaylistController from './controllers/PlaylistController';
 import UserController from './controllers/UserController';
 
@@ -20,11 +21,11 @@ router.delete('/users/:id', UserController.remove);
  * Routes Music
  */
 
-router.get('/categories', CategoryController.list);
-router.get('/categories/:id', CategoryController.details);
-router.post('/categories', CategoryController.store);
-router.put('/categories/:id', CategoryController.update);
-router.delete('/categories/:id', CategoryController.remove);
+router.get('/musics', MusicController.list);
+router.get('/musics/:id', MusicController.details);
+router.post('/musics', MusicController.store);
+router.put('/musics/:id', MusicController.update);
+router.delete('/musics/:id', MusicController.remove);
 
 /**
  * Routes Playlist
@@ -42,6 +43,10 @@ router.delete('/playlists/:id', PlaylistController.remove);
  * Routes Category
  */
 
-
+router.get('/categories', CategoryController.list);
+router.get('/categories/:id', CategoryController.details);
+router.post('/categories', CategoryController.store);
+router.put('/categories/:id', CategoryController.update);
+router.delete('/categories/:id', CategoryController.remove);
 
 export default router;
