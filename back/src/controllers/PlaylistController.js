@@ -1,5 +1,5 @@
 import Playlist from "../models/Playlist";
-
+import jsonwebtoken from "jsonwebtoken";
 
 export default class PlaylistController {
 
@@ -32,21 +32,21 @@ export default class PlaylistController {
 
             // C'est commenté en attendant de mettre en place le JWT
 
-            // // Récupérer le token jwt qui est passé dans le header de la requête
-            // let token = req.headers.authorization.replace(/Bearer /g, '');
+            // Récupérer le token jwt qui est passé dans le header de la requête
+            let token = req.headers.authorization.replace(/Bearer /g, '');
 
-            // // Décrypter le token JWT
-            // let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            // Décrypter le token JWT
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
 
-            // // Récupérer l'id de l'user qui possède le token
-            // let idUser = decryptToken.sub;
+            // Récupérer l'id de l'user qui possède le token
+            let idUser = decryptToken.sub;
 
-            // // Récupérer les infos de l'user
-            // // let user = await User.findById(decryptToken.sub);
+            // Récupérer les infos de l'user
+            // let user = await User.findById(decryptToken.sub);
 
-            // let playlists = await Playlist.find({ userId: idUser }).select('-__v');
+            let playlists = await Playlist.find({ userId: idUser }).select('-__v');
 
-            let playlists = await Playlist.find({ userId: "5fdf979153d7cd586c241fa4" }).select('-__v');
+            // let playlists = await Playlist.find({ userId: "5fdf979153d7cd586c241fa4" }).select('-__v');
             
 
             body = { playlists };
@@ -92,25 +92,25 @@ export default class PlaylistController {
 
             // C'est commenté en attendant de mettre en place le JWT
 
-            // // Récupérer le token jwt qui est passé dans le header de la requête
-            // let token = req.headers.authorization.replace(/Bearer /g, '');
+            // Récupérer le token jwt qui est passé dans le header de la requête
+            let token = req.headers.authorization.replace(/Bearer /g, '');
 
-            // // Décrypter le token JWT
-            // let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            // Décrypter le token JWT
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
 
-            // // Récupérer l'id de l'user qui possède le token
-            // let idUser = decryptToken.sub;
+            // Récupérer l'id de l'user qui possède le token
+            let idUser = decryptToken.sub;
 
-            // // Récupérer les infos de l'user
-            // // let user = await User.findById(decryptToken.sub);
+            // Récupérer les infos de l'user
+            // let user = await User.findById(decryptToken.sub);
 
-            // //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
-            // if (!playlist.public || playlist.userId !== idUser) {
-            //     new Error({
-            //         error: "Private playlist",
-            //         message: "Cette playlist n'est pas la vôtre et n'est pas publique."
-            //     });
-            // }
+            //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
+            if (!playlist.public || playlist.userId !== idUser) {
+                new Error({
+                    error: "Private playlist",
+                    message: "Cette playlist n'est pas la vôtre et n'est pas publique."
+                });
+            }
 
             body = { playlist };
         } catch (e) {
@@ -132,22 +132,23 @@ export default class PlaylistController {
         try {
             // C'est commenté en attendant de mettre en place le JWT
 
-            // // Récupérer le token jwt qui est passé dans le header de la requête
-            // let token = req.headers.authorization.replace(/Bearer /g, '');
+            // Récupérer le token jwt qui est passé dans le header de la requête
+            let token = req.headers.authorization.replace(/Bearer /g, '');
 
-            // // Décrypter le token JWT
-            // let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            // Décrypter le token JWT
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
 
-            // // Récupérer l'id de l'user qui possède le token
-            // let idUser = decryptToken.sub;
+            // Récupérer l'id de l'user qui possède le token
+            let idUser = decryptToken.sub;
 
-            // // Récupérer les infos de l'user
-            // // let user = await User.findById(decryptToken.sub);
+            // Récupérer les infos de l'user
+            // let user = await User.findById(decryptToken.sub);
 
             // On met comme créateur de la playlist le user connecté
-            // req.body.userId = idUser;
+            req.body.userId = idUser;
 
             // Pour tester oubliez pas de mettre quelque chose dans userId quand même dans votre requête sur Insomnia
+
             let playlist = await Playlist.create(req.body);
 
             body = { playlist };
@@ -172,25 +173,25 @@ export default class PlaylistController {
 
             // C'est commenté en attendant de mettre en place le JWT
 
-            // // Récupérer le token jwt qui est passé dans le header de la requête
-            // let token = req.headers.authorization.replace(/Bearer /g, '');
+            // Récupérer le token jwt qui est passé dans le header de la requête
+            let token = req.headers.authorization.replace(/Bearer /g, '');
 
-            // // Décrypter le token JWT
-            // let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            // Décrypter le token JWT
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
 
-            // // Récupérer l'id de l'user qui possède le token
-            // let idUser = decryptToken.sub;
+            // Récupérer l'id de l'user qui possède le token
+            let idUser = decryptToken.sub;
 
-            // // Récupérer les infos de l'user
-            // // let user = await User.findById(decryptToken.sub);
+            // Récupérer les infos de l'user
+            // let user = await User.findById(decryptToken.sub);
 
-            // //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
-            // if (playlist.userId !== idUser) {
-            //     new Error({
-            //         error: "Private playlist",
-            //         message: "Cette playlist n'est pas la vôtre et n'est pas publique."
-            //     });
-            // }
+            //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
+            if (playlist.userId !== idUser) {
+                new Error({
+                    error: "Private playlist",
+                    message: "Cette playlist n'est pas la vôtre et n'est pas publique."
+                });
+            }
 
             body = { playlist };
 
@@ -213,25 +214,25 @@ export default class PlaylistController {
 
             // C'est commenté en attendant de mettre en place le JWT
 
-            // // Récupérer le token jwt qui est passé dans le header de la requête
-            // let token = req.headers.authorization.replace(/Bearer /g, '');
+            // Récupérer le token jwt qui est passé dans le header de la requête
+            let token = req.headers.authorization.replace(/Bearer /g, '');
 
-            // // Décrypter le token JWT
-            // let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            // Décrypter le token JWT
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
 
-            // // Récupérer l'id de l'user qui possède le token
-            // let idUser = decryptToken.sub;
+            // Récupérer l'id de l'user qui possède le token
+            let idUser = decryptToken.sub;
 
-            // // Récupérer les infos de l'user
-            // // let user = await User.findById(decryptToken.sub);
+            // Récupérer les infos de l'user
+            // let user = await User.findById(decryptToken.sub);
 
-            // //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
-            // if (playlist.userId !== idUser) {
-            //     new Error({
-            //         error: "Private playlist",
-            //         message: "Cette playlist n'est pas la vôtre et n'est pas publique."
-            //     });
-            // }
+            //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
+            if (playlist.userId !== idUser) {
+                new Error({
+                    error: "Private playlist",
+                    message: "Cette playlist n'est pas la vôtre et n'est pas publique."
+                });
+            }
 
 
             let playlist = await Playlist.findByIdAndDelete(id);
