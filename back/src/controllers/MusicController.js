@@ -2,7 +2,7 @@ import Music from "../models/Music";
 
 
 export default class CategoryController {
-    
+
     static async list(req, res) {
         let status = 200;
         let body = {};
