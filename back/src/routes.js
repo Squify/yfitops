@@ -3,6 +3,7 @@ import CategoryController from './controllers/CategoryController';
 import MusicController from './controllers/MusicController';
 import PlaylistController from './controllers/PlaylistController';
 import UserController from './controllers/UserController';
+import Multer from './utils/Multer';
 
 const router = Router();
 
@@ -23,7 +24,7 @@ router.delete('/users/:id', UserController.remove);
 
 router.get('/musics', MusicController.list);
 router.get('/musics/:id', MusicController.details);
-router.post('/musics', MusicController.store);
+router.post('/musics', Multer.upload("musics", "image_path"), MusicController.store);
 router.put('/musics/:id', MusicController.update);
 router.delete('/musics/:id', MusicController.remove);
 
