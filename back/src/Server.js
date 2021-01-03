@@ -5,22 +5,22 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes";
 import jwt from "./config/jwt";
-// import swaggerUi from "swagger-ui-express";
+import swaggerUi from "swagger-ui-express";
 // import swaggerJsdoc from "swagger-jsdoc";
-// import yamlJs from "yamljs";
-// const swaggerDoc = yamlJs.load('swagger.yaml');
+import yamlJs from "yamljs";
+const swaggerDoc = yamlJs.load('swagger.yaml');
 
 class Server {
     static config() {
         const app = express();
-        app.use(jwt());
+        // app.use(jwt());
 
         // const swaggerDoc = swaggerJsdoc({
         //     swaggerDefinition: {
         //         info: {
-        //             title: `Netfix API`,
+        //             title: `Yfitops API`,
         //             version: `1.0.0`,
-        //             description: `Netflix API description`
+        //             description: `Yfitops API description`
         //         },
         //         securityDefinitions: {
         //             bearerAuth: {
@@ -33,7 +33,7 @@ class Server {
         //     },
         //     apis: [`src/controllers/*.js`]
         // });
-        // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+        app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
         // app.use('/uploads', express.static('uploads'));
 
