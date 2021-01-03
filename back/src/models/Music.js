@@ -6,9 +6,17 @@ const MusicSchema = new Schema({
         type: String,
         required: true
     },
-    sound_path: {
+    artist: {
         type: String,
         required: true
+    },
+    duration: {
+        type: String,
+        required: true
+    },
+    sound_path: {
+        type: String
+        // required: true
     },
     image_path: {
         type: String,

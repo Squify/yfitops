@@ -1,4 +1,5 @@
 import User from "../models/User";
+import jsonwebtoken from "jsonwebtoken";
 
 
 export default class UserController {
@@ -102,7 +103,38 @@ export default class UserController {
         return res.status(status).json(body);
     }
 
+    static async auth(req, res) {
+        let status = 200;
+        let body = {};
 
+        try {
+
+            let { email, password } = req.body;
+            let user = await User.findOne({
+                email: email
+            }).select("-__v");
+
+            if (user && password === user.password) {
+                let { JWT_SECRET } = process.env;
+                let token = jsonwebtoken.sign({
+                    sub: user._id
+                }, JWT_SECRET);
+                body = { user, token };
+            } else {
+                status = 401;
+                new Error('Unauthorized');
+            }
+
+        } catch (e) {
+            status = status !== 200 ? status : 500;
+            body = {
+                error: e.error || 'User authentication',
+                message: e.message || 'An error is occured into user auth'
+            };
+        }
+
+        return res.status(status).json(body);
+    }
 
 
 }
