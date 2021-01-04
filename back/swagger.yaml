@@ -378,34 +378,128 @@ paths:
           description: "user deleted with success"
         "500":
           description: "An error has occured into delete user"
+  /playlist:
+    get:
+      tags:
+      - "playlist"
+      summary: "Get all playlist"
+      description: ""
+      responses:
+        "200":
+          description: "all playlist"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlist"
+    post:
+      tags:
+      - "playlist"
+      summary: "create playlist"
+      description: ""
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created playlist object"
+        required: true
+        schema:
+          $ref: "#/definitions/Playlist"
+      responses:
+        "200":
+          description: "Playlist created"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlists"
+  /playlist/{id}:
+    get:
+      tags:
+      - "playlist"
+      summary: "get details of a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the user that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Playlist with given id"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlist with id"
+    put:
+      tags:
+      - "playlist"
+      summary: "update a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the playlist that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Update playlist object"
+        required: true
+        schema:
+          $ref: "#/definitions/Playlist"
+      responses:
+        "200":
+          description: "Playlist with given id"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into update playlist"
+    delete:
+      tags:
+      - "playlist"
+      summary: "delete a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the playlist that need to be delete"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "playlist deleted"
+        "500":
+          description: "An error has occured into delete playlist"
+  /playlist/mine:
+    get:
+      tags:
+      - "playlist"
+      security:
+      - BasicAuth: []
+      responses:
+        "200":
+          description: "All of your playlists"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get mine playlist"
+  /playlist/public:
+    get:
+      tags:
+      - "playlist"
+      responses:
+        "200":
+          description: "All of public playlists"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get public playlist"
 definitions:
-  Order:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      petId:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
-      shipDate:
-        type: "string"
-        format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-        - "placed"
-        - "approved"
-        - "delivered"
-      complete:
-        type: "boolean"
-        default: false
-    xml:
-      name: "Order"
   Category:
     type: "object"
     properties:
@@ -456,53 +550,6 @@ definitions:
           $ref: "#/definitions/Music"
     xml:
       name: "Playlist"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Tag"
-  Pet:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
-        items:
-          type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
   Music:
     type: "object"
     required:
@@ -534,16 +581,8 @@ definitions:
         example: "file_path"
     xml:
       name: "Music"
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
