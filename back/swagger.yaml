@@ -495,7 +495,7 @@ paths:
       tags:
       - "user"
       summary: "Create user"
-      description: "This can only be done by the logged in user."
+      description: ""
       operationId: "createUser"
       produces:
       - "application/xml"
@@ -508,53 +508,11 @@ paths:
         schema:
           $ref: "#/definitions/User"
       responses:
-        default:
-          description: "successful operation"
-  /user/createWithArray:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/createWithList:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/login:
+        "200":
+          description: "User Created"
+        "500":
+          description: "An error has occured into user create"
+  /user/auth:
     get:
       tags:
       - "user"
@@ -565,14 +523,14 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "email"
         in: "query"
-        description: "The user name for login"
+        description: "The user email for login in"
         required: true
         type: "string"
       - name: "password"
         in: "query"
-        description: "The password for login in clear text"
+        description: "The password for login in"
         required: true
         type: "string"
       responses:
@@ -589,8 +547,8 @@ paths:
               type: "string"
               format: "date-time"
               description: "date in UTC when token expires"
-        "400":
-          description: "Invalid username/password supplied"
+        "500":
+          description: "An error has occured into login"
   /user/logout:
     get:
       tags:
@@ -605,20 +563,20 @@ paths:
       responses:
         default:
           description: "successful operation"
-  /user/{username}:
+  /user/{id}:
     get:
       tags:
       - "user"
-      summary: "Get user by user name"
+      summary: "Get details of a user by user id"
       description: ""
-      operationId: "getUserByName"
+      operationId: "getUser"
       produces:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "id"
         in: "path"
-        description: "The name that needs to be fetched. Use user1 for testing. "
+        description: "The id that needs to be fetched."
         required: true
         type: "string"
       responses:
@@ -626,10 +584,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/User"
-        "400":
-          description: "Invalid username supplied"
-        "404":
-          description: "User not found"
+        "500":
+          description: "An error has occured into get user"
     put:
       tags:
       - "user"
@@ -640,9 +596,9 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "id"
         in: "path"
-        description: "name that need to be updated"
+        description: "Id of the user that need to be updated"
         required: true
         type: "string"
       - in: "body"
@@ -652,30 +608,32 @@ paths:
         schema:
           $ref: "#/definitions/User"
       responses:
-        "400":
-          description: "Invalid user supplied"
-        "404":
-          description: "User not found"
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/User"
+        "500":
+          description: "An error has occured into update user"
     delete:
       tags:
       - "user"
       summary: "Delete user"
-      description: "This can only be done by the logged in user."
+      description: ""
       operationId: "deleteUser"
       produces:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "id"
         in: "path"
-        description: "The name that needs to be deleted"
+        description: "The id that needs to be deleted"
         required: true
         type: "string"
       responses:
-        "400":
-          description: "Invalid username supplied"
-        "404":
-          description: "User not found"
+        "200":
+          description: "user deleted with success"
+        "500":
+          description: "An error has occured into delete user"
 securityDefinitions:
   petstore_auth:
     type: "oauth2"
@@ -732,8 +690,6 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      username:
-        type: "string"
       firstName:
         type: "string"
       lastName:
@@ -742,14 +698,32 @@ definitions:
         type: "string"
       password:
         type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
+      role:
+        type: "number"
+      playlists:
+        type: "array"
+        items:
+          $ref: "#/definitions/Playlist"
+      favorites:
+        type: "array"
+        items:
+          $ref: "#/definitions/Music"
     xml:
       name: "User"
+  Playlist:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      musics:
+        type: "array"
+        items:
+          $ref: "#/definitions/Music"
+    xml:
+      name: "Playlist"
   Tag:
     type: "object"
     properties:
