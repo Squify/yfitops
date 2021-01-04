@@ -125,6 +125,115 @@ paths:
           description: "An error has occured into music delete"
         "200":
           description: "Music delete"
+  /categories:
+    get:
+      tags:
+      - "category"
+      summary: "Get list of the categories"
+      description: ""
+      operationId: "getCategories"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Category"
+    post:
+      tags:
+      - "category"
+      summary: "Add a new category to the database"
+      description: ""
+      operationId: "addCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Category object that will be add to Yfitops"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "200":
+          description: "Post category"
+  /categories/{id}:
+    get:
+      tags:
+      - "category"
+      summary: "Details of an existing category"
+      description: ""
+      operationId: "detailsCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to fetch"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into category details"
+        "200":
+          description: "Music get"
+          schema:
+            $ref: "#/definitions/Category"
+    put:
+      tags:
+      - "category"
+      summary: "Update an existing category"
+      description: ""
+      operationId: "updateCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to update"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Category object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "500":
+          description: "An error has occured into category updating"
+        "200":
+          description: "Category updated"
+          schema:
+            $ref: "#/definitions/Category"
+    delete:
+      tags:
+      - "category"
+      summary: "Delete an existing category"
+      description: ""
+      operationId: "deleteCategory"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to delete"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into category delete"
+        "200":
+          description: "Category delete"
   /pet/findByTags:
     get:
       tags:
