@@ -13,7 +13,6 @@ tags:
 - name: "playlist"
   description: "Operation on playlist of musics"
 schemes:
-- "https"
 - "http"
 paths:
   /musics:
@@ -128,17 +127,19 @@ paths:
   /categories:
     get:
       tags:
-      - "category"
-      summary: "Get list of the categories"
-      description: ""
-      operationId: "getCategories"
+      - category
+      summary: Get list of the categories
+      description: 
+      operationId: getCategories
+      consumes:
+      - application/json
       produces:
-      - "application/json"
+      - application/json
       responses:
-        "200":
-          description: ""
+        200:
+          description: 
           schema:
-            type: "array"
+            type: array
             items:
               $ref: "#/definitions/Category"
     post:
@@ -586,3 +587,9 @@ components:
     BasicAuth:
       type: http
       scheme: basic
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    scheme: bearer
+    in: header
