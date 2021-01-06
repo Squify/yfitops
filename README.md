@@ -23,7 +23,7 @@ La page d'administration contient 4 onglets : "musiques", "playlists", "utilisat
     <li>Vérifier que la base de données fonctionne</li>
     <li>Se placer dans le dossier du FRONT : <code>cd front</code></li>
     <li>Lancer la commande <code>npm install</code></li>
-    <li>Se placer dans le dossier de l'API : <code>cd back</code></li>
+    <li>Se placer dans le dossier de l'API : <code>cd ../back</code></li>
     <li>Lancer la commande <code>npm install</code></li>
 </ol> 
 
