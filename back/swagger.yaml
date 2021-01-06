@@ -1,0 +1,598 @@
+swagger: "2.0"
+info:
+  description: "This swagger is about the API of Yfitops"
+  version: "1.0.0"
+  title: "Swagger Yfitops"
+host: localhost:3500
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    scheme: bearer
+    in: header
+tags:
+- name: "music"
+  description: "Everything about the Musics"
+- name: "category"
+  description: "Category of the musics"
+- name: "user"
+  description: "Operations about user"
+- name: "playlist"
+  description: "Operation on playlist of musics"
+schemes:
+- "http"
+paths:
+  /musics:
+    get:
+      tags:
+      - "music"
+      summary: "Get list of the music"
+      description: ""
+      operationId: "getMusic"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Music"
+    post:
+      tags:
+      - "music"
+      summary: "Add a new music to the database"
+      description: ""
+      operationId: "addMusic"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Music object that will be add to Yfitops"
+        required: true
+        schema:
+          $ref: "#/definitions/Music"
+      responses:
+        "200":
+          description: "Post music"
+  /musics/{id}:
+    get:
+      tags:
+      - "music"
+      summary: "Details of an existing music"
+      description: ""
+      operationId: "detailsMusic"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of pet to fetch"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into music details"
+        "200":
+          description: "Music updated"
+          schema:
+            $ref: "#/definitions/Music"
+    put:
+      tags:
+      - "music"
+      summary: "Update an existing music"
+      description: ""
+      operationId: "updateMusic"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of pet to fetch"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Music object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Music"
+      responses:
+        "500":
+          description: "An error has occured into music updating"
+        "200":
+          description: "Music updated"
+          schema:
+            $ref: "#/definitions/Music"
+    delete:
+      tags:
+      - "music"
+      summary: "Delete an existing music"
+      description: ""
+      operationId: "deleteMusic"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of pet to fetch"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into music delete"
+        "200":
+          description: "Music delete"
+  /categories:
+    get:
+      tags:
+      - category
+      summary: Get list of the categories
+      description: 
+      operationId: getCategories
+      security:
+        - bearerAuth: []
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Category"
+    post:
+      tags:
+      - "category"
+      summary: "Add a new category to the database"
+      description: ""
+      operationId: "addCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Category object that will be add to Yfitops"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "200":
+          description: "Post category"
+  /categories/{id}:
+    get:
+      tags:
+      - "category"
+      summary: "Details of an existing category"
+      description: ""
+      operationId: "detailsCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to fetch"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into category details"
+        "200":
+          description: "Music get"
+          schema:
+            $ref: "#/definitions/Category"
+    put:
+      tags:
+      - "category"
+      summary: "Update an existing category"
+      description: ""
+      operationId: "updateCategory"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to update"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Category object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Category"
+      responses:
+        "500":
+          description: "An error has occured into category updating"
+        "200":
+          description: "Category updated"
+          schema:
+            $ref: "#/definitions/Category"
+    delete:
+      tags:
+      - "category"
+      summary: "Delete an existing category"
+      description: ""
+      operationId: "deleteCategory"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to delete"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "An error has occured into category delete"
+        "200":
+          description: "Category delete"
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      description: ""
+      operationId: "createUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "User Created"
+        "500":
+          description: "An error has occured into user create"
+  /user/auth:
+    get:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "query"
+        description: "The user email for login in"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        "500":
+          description: "An error has occured into login"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+  /user/{id}:
+    get:
+      tags:
+      - "user"
+      summary: "Get details of a user by user id"
+      description: ""
+      operationId: "getUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        "500":
+          description: "An error has occured into get user"
+    put:
+      tags:
+      - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the user that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/User"
+        "500":
+          description: "An error has occured into update user"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user"
+      description: ""
+      operationId: "deleteUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "user deleted with success"
+        "500":
+          description: "An error has occured into delete user"
+  /playlist:
+    get:
+      tags:
+      - "playlist"
+      summary: "Get all playlist"
+      description: ""
+      responses:
+        "200":
+          description: "all playlist"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlist"
+    post:
+      tags:
+      - "playlist"
+      summary: "create playlist"
+      description: ""
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created playlist object"
+        required: true
+        schema:
+          $ref: "#/definitions/Playlist"
+      responses:
+        "200":
+          description: "Playlist created"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlists"
+  /playlist/{id}:
+    get:
+      tags:
+      - "playlist"
+      summary: "get details of a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the user that need to be updated"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Playlist with given id"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get playlist with id"
+    put:
+      tags:
+      - "playlist"
+      summary: "update a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the playlist that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Update playlist object"
+        required: true
+        schema:
+          $ref: "#/definitions/Playlist"
+      responses:
+        "200":
+          description: "Playlist with given id"
+          schema:
+            $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into update playlist"
+    delete:
+      tags:
+      - "playlist"
+      summary: "delete a specific playlist"
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of the playlist that need to be delete"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "playlist deleted"
+        "500":
+          description: "An error has occured into delete playlist"
+  /playlist/mine:
+    get:
+      tags:
+      - "playlist"
+      security:
+      - BasicAuth: []
+      responses:
+        "200":
+          description: "All of your playlists"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get mine playlist"
+  /playlist/public:
+    get:
+      tags:
+      - "playlist"
+      responses:
+        "200":
+          description: "All of public playlists"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Playlist"
+        "500":
+          description: "An error has occured into get public playlist"
+definitions:
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Category"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      role:
+        type: "number"
+      playlists:
+        type: "array"
+        items:
+          $ref: "#/definitions/Playlist"
+      favorites:
+        type: "array"
+        items:
+          $ref: "#/definitions/Music"
+    xml:
+      name: "User"
+  Playlist:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      musics:
+        type: "array"
+        items:
+          $ref: "#/definitions/Music"
+    xml:
+      name: "Playlist"
+  Music:
+    type: "object"
+    required:
+    - "name"
+    - "artist"
+    - "duration"
+    - "sound_path"
+    - "image_path"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      category:
+        $ref: "#/definitions/Category"
+      name:
+        type: "string"
+        example: "boggy woogie"
+      artist:
+        type: "string"
+        example: "mickael francois"
+      duration:
+        type: "string"
+        example: "12 minutes 04 seconde"
+      sound_path:
+        type: "string"
+        example: "file_path"
+      image_path:
+        type: "string"
+        example: "file_path"
+    xml:
+      name: "Music"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
