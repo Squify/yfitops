@@ -29,4 +29,5 @@ La page d'administration contient 4 onglets : "musiques", "playlists", "utilisat
 
 ## Difficultés rencontrées
 - Trouver du temps
+- Gérer des fichiers de champs multiples vers des dossiers multiples selon leur mimetype à partir d'une seule fonction
 - 
