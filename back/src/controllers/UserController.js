@@ -9,7 +9,7 @@ export default class UserController {
         let body = {};
 
         try {
-            let users = await User.find().select('-__v -password');
+            let users = await User.find().select('-__v -password').populate("playlists").populate("favorites");
 
             body = { users };
         } catch (e) {
@@ -30,7 +30,7 @@ export default class UserController {
 
         try {
             let { id } = req.params;
-            let user = await User.findById(id).select('-__v -password');
+            let user = await User.findById(id).select('-__v -password').populate("playlists").populate("favorites");
 
             body = { user };
         } catch (e) {
@@ -70,7 +70,7 @@ export default class UserController {
 
         try {
             let { id } = req.params;
-            let user = await User.findByIdAndUpdate(id, req.body, { new: true }).select('-__v -password');
+            let user = await User.findByIdAndUpdate(id, req.body, { new: true }).select('-__v -password').populate("playlists").populate("favorites");
 
             body = { user };
 
@@ -112,7 +112,7 @@ export default class UserController {
             let { email, password } = req.body;
             let user = await User.findOne({
                 email: email
-            }).select("-__v");
+            }).select("-__v").populate("playlists").populate("favorites");
 
             if (user && password === user.password) {
                 let { JWT_SECRET } = process.env;
