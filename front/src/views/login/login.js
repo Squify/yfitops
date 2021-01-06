@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './login.scss'
-import {Card, Button} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export default class Login extends Component {
 
@@ -9,7 +10,7 @@ export default class Login extends Component {
             <div className="login-container">
                 <Card className="text-center">
                     <div className="image-container">
-                        <Card.Img src="images/logo.png" />
+                        <Card.Img src="images/logo.png"/>
                     </div>
                     <Card.Header>Vous devez être connecté pour accéder au contenu de l'application</Card.Header>
                     <Card.Body>
@@ -28,7 +29,9 @@ export default class Login extends Component {
                     </Card.Body>
                     <hr className="hr"/>
                     <Card.Footer className="text-muted">Pas encore de compte ?</Card.Footer>
-                    <Button className="btn btn-dark">Créer un compte</Button>
+                    <Link to={`/register`}>
+                        <Button className="btn btn-dark">Créer un compte</Button>
+                    </Link>
                 </Card>
             </div>
         );
