@@ -1,5 +1,5 @@
 import Music from "../models/Music";
-
+import fs from "fs";
 
 export default class CategoryController {
 
@@ -67,9 +67,28 @@ export default class CategoryController {
         let status = 200;
         let body = {};
 
+        console.log(req.body);
+
         try {
             let { id } = req.params;
-            let music = await Music.findByIdAndUpdate(id, req.body, { new: true }).select('-__v').populate("categories");
+            let music = await Music.findById(id).select('-__v').populate("categories");
+            // let music = await Music.findByIdAndUpdate(id, req.body, { new: true }).select('-__v').populate("categories");
+
+            if (req.body.image_path) {
+                if (fs.existsSync(`./${music.image_path}`)) {
+                    await fs.unlinkSync(`./${music.image_path}`)
+                }
+            }
+
+            if (req.body.sound_path) {
+                if (fs.existsSync(`./${music.sound_path}`)) {
+                    await fs.unlinkSync(`./${music.sound_path}`)
+                }
+            }
+
+            await music.update(req.body);
+
+            await music.save();
 
             body = { music };
 
