@@ -15,8 +15,8 @@ const MusicSchema = new Schema({
         required: true
     },
     sound_path: {
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     image_path: {
         type: String,
