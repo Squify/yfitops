@@ -14,6 +14,7 @@ import AddPlaylist from "./views/administration/playlists/addPlaylist";
 import AddCategory from "./views/administration/categories/addCategory";
 import UpdateCategory from "./views/administration/categories/updateCategory";
 import Login from "./views/login/login";
+import Register from "./views/register/register";
 
 export default class App extends Component {
 
@@ -32,6 +33,7 @@ export default class App extends Component {
                         <Col xs={2}/>
                         <Col xs={8}>
                             <Route exact path="/login" component={Login}/>
+                            <Route exact path="/register" component={Register}/>
                         </Col>
                         <Col xs={2}/>
                     </Row>
