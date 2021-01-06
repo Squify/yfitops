@@ -3,6 +3,13 @@ info:
   description: "This swagger is about the API of Yfitops"
   version: "1.0.0"
   title: "Swagger Yfitops"
+host: localhost:3500
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    scheme: bearer
+    in: header
 tags:
 - name: "music"
   description: "Everything about the Musics"
@@ -131,6 +138,8 @@ paths:
       summary: Get list of the categories
       description: 
       operationId: getCategories
+      security:
+        - bearerAuth: []
       consumes:
       - application/json
       produces:
@@ -587,9 +596,3 @@ components:
     BasicAuth:
       type: http
       scheme: basic
-securityDefinitions:
-  bearerAuth:
-    type: apiKey
-    name: Authorization
-    scheme: bearer
-    in: header
