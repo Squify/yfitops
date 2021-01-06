@@ -1,0 +1,14 @@
+.homepage-playlist-container {
+    padding-bottom: 20px;
+}
+
+.playlist-card .card-title {
+    padding-top: 5px;
+    color: #d9d9d9;
+}
+
+.playlist-card:hover {
+    border-radius: 15px;
+    background-color: #282828;
+    text-decoration: none;
+}
