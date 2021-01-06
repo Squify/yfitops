@@ -3,6 +3,13 @@ info:
   description: "This swagger is about the API of Yfitops"
   version: "1.0.0"
   title: "Swagger Yfitops"
+host: localhost:3500
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    scheme: bearer
+    in: header
 tags:
 - name: "music"
   description: "Everything about the Musics"
@@ -13,7 +20,6 @@ tags:
 - name: "playlist"
   description: "Operation on playlist of musics"
 schemes:
-- "https"
 - "http"
 paths:
   /musics:
@@ -128,17 +134,21 @@ paths:
   /categories:
     get:
       tags:
-      - "category"
-      summary: "Get list of the categories"
-      description: ""
-      operationId: "getCategories"
+      - category
+      summary: Get list of the categories
+      description: 
+      operationId: getCategories
+      security:
+        - bearerAuth: []
+      consumes:
+      - application/json
       produces:
-      - "application/json"
+      - application/json
       responses:
-        "200":
-          description: ""
+        200:
+          description: 
           schema:
-            type: "array"
+            type: array
             items:
               $ref: "#/definitions/Category"
     post:
