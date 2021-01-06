@@ -135,6 +135,4 @@ export default class UserController {
 
         return res.status(status).json(body);
     }
-
-
 }
