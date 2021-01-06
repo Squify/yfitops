@@ -26,7 +26,7 @@ router.get('/musics', MusicController.list);
 router.get('/musics/:id', MusicController.details);
 // router.post('/musics', Multer.upload("musics", "image_path"), Multer.upload("musics", "sound_path"), MusicController.store);
 router.post('/musics', Multer.upload("musics"), MusicController.store);
-router.put('/musics/:id', MusicController.update);
+router.put('/musics/:id', Multer.upload("musics"), MusicController.update);
 router.delete('/musics/:id', MusicController.remove);
 
 /**
