@@ -8,7 +8,10 @@ export default class PlaylistController {
         let body = {};
 
         try {
-            let playlists = await Playlist.find().select('-__v');
+            let playlists = await Playlist.find().select('-__v').populate({
+                path: "musics",
+                populate: { path: "categories" }
+            });
 
             body = { playlists };
         } catch (e) {
@@ -44,10 +47,13 @@ export default class PlaylistController {
             // Récupérer les infos de l'user
             // let user = await User.findById(decryptToken.sub);
 
-            let playlists = await Playlist.find({ userId: idUser }).select('-__v');
+            let playlists = await Playlist.find({ userId: idUser }).select('-__v').populate({
+                path: "musics",
+                populate: { path: "categories" }
+            });;
 
             // let playlists = await Playlist.find({ userId: "5fdf979153d7cd586c241fa4" }).select('-__v');
-            
+
 
             body = { playlists };
         } catch (e) {
@@ -67,7 +73,10 @@ export default class PlaylistController {
         let body = {};
 
         try {
-            let playlists = await Playlist.find({public: true}).select('-__v');
+            let playlists = await Playlist.find({ public: true }).select('-__v').populate({
+                path: "musics",
+                populate: { path: "categories" }
+            });;
 
             body = { playlists };
         } catch (e) {
@@ -88,7 +97,10 @@ export default class PlaylistController {
 
         try {
             let { id } = req.params;
-            let playlist = await Playlist.findById(id).select('-__v');
+            let playlist = await Playlist.findById(id).select('-__v').populate({
+                path: "musics",
+                populate: { path: "categories" }
+            });;
 
             // C'est commenté en attendant de mettre en place le JWT
 
@@ -169,7 +181,10 @@ export default class PlaylistController {
 
         try {
             let { id } = req.params;
-            let playlist = await Playlist.findByIdAndUpdate(id, req.body, { new: true }).select('-__v');
+            let playlist = await Playlist.findByIdAndUpdate(id, req.body, { new: true }).select('-__v').populate({
+                path: "musics",
+                populate: { path: "categories" }
+            });;
 
             // C'est commenté en attendant de mettre en place le JWT
 
