@@ -13,7 +13,7 @@ const swaggerDoc = yamlJs.load('swagger.yaml');
 class Server {
     static config() {
         const app = express();
-        // app.use(jwt());
+        app.use(jwt());
 
         // const swaggerDoc = swaggerJsdoc({
         //     swaggerDefinition: {
