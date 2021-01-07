@@ -1,5 +1,7 @@
 import Playlist from "../models/Playlist";
 import jsonwebtoken from "jsonwebtoken";
+import fs from "fs";
+import User from "../models/User";
 
 export default class PlaylistController {
 
@@ -181,7 +183,7 @@ export default class PlaylistController {
 
         try {
             let { id } = req.params;
-            let playlist = await Playlist.findByIdAndUpdate(id, req.body, { new: true }).select('-__v').populate({
+            let playlist = await Playlist.findById(id).select('-__v').populate({
                 path: "musics",
                 populate: { path: "categories" }
             });;
@@ -198,10 +200,22 @@ export default class PlaylistController {
             let idUser = decryptToken.sub;
 
             // Récupérer les infos de l'user
-            // let user = await User.findById(decryptToken.sub);
+            let user = await User.findById(decryptToken.sub);
 
             //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
-            if (playlist.userId !== idUser) {
+            if (playlist.userId === idUser || user.role == 10) {
+
+                if (req.body.image_path) {
+                    if (fs.existsSync(`./${playlist.image_path}`)) {
+                        await fs.unlinkSync(`./${playlist.image_path}`)
+                    }
+                }
+
+                await playlist.update(req.body);
+
+                await playlist.save();
+
+            } else {
                 new Error({
                     error: "Private playlist",
                     message: "Cette playlist n'est pas la vôtre et n'est pas publique."
@@ -239,25 +253,36 @@ export default class PlaylistController {
             let idUser = decryptToken.sub;
 
             // Récupérer les infos de l'user
-            // let user = await User.findById(decryptToken.sub);
+            let user = await User.findById(decryptToken.sub);
+
+            let playlist = await Playlist.findById(id);
+
 
             //On vérifie si l'auteur de la playlist est bien celui qui est connecté et qui demande à la voir ou si la playlist est publique
-            if (playlist.userId !== idUser) {
+            if (playlist.userId === idUser || user.role == 10) {
+
+                await playlist.delete();
+
+                if (fs.existsSync(`./${playlist.image_path}`)) {
+                    await fs.unlinkSync(`./${playlist.image_path}`)
+                }
+
+            } else {
+
+                console.log("bka");
                 new Error({
                     error: "Private playlist",
                     message: "Cette playlist n'est pas la vôtre et n'est pas publique."
                 });
+
             }
-
-
-            let playlist = await Playlist.findByIdAndDelete(id);
 
 
         } catch (e) {
             status = status !== 200 ? status : 500;
             body = {
-                error: e.error || 'Playlists update',
-                message: e.message || 'An error has occured into playlist updating'
+                error: e.error || 'Playlists delete',
+                message: e.message || 'An error has occured into playlist deleting'
             };
         }
         return res.status(status).json(body);

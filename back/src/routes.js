@@ -35,11 +35,11 @@ router.delete('/musics/:id', Auth.isAllowed([10]), MusicController.remove);
  */
 
 router.get('/playlists', Auth.isAllowed([10]), PlaylistController.list);
-router.get('/playlists/mine', Auth.isAllowed([0,10]), PlaylistController.listMine);
+router.get('/playlists/private', Auth.isAllowed([0,10]), PlaylistController.listMine);
 router.get('/playlists/public', PlaylistController.listPublic);
 router.get('/playlists/:id', Auth.isAllowed([10]), PlaylistController.details);
-router.post('/playlists', PlaylistController.store);
-router.put('/playlists/:id', Auth.isAllowed([10]), PlaylistController.update);
+router.post('/playlists', Multer.upload("playlists"), PlaylistController.store);
+router.put('/playlists/:id', Auth.isAllowed([10]), Multer.upload("playlists"), PlaylistController.update);
 router.delete('/playlists/:id', Auth.isAllowed([10]), PlaylistController.remove);
 
 /**
