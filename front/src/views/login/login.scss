@@ -1,0 +1,34 @@
+.login-container {
+  margin-top: 20px;
+
+  .card {
+    border: unset;
+
+    .card-img {
+      width: 30% !important;
+    }
+
+    .card-header {
+      background-color: unset;
+      border: unset;
+    }
+
+    .card-title {
+      margin-bottom: 15px !important;
+    }
+
+    .card-body {
+      margin-bottom: 20px;
+
+      .form-group {
+        text-align: left;
+      }
+    }
+
+    .card-footer {
+      background-color: unset;
+      margin-top: 20px;
+      border: unset;
+    }
+  }
+}

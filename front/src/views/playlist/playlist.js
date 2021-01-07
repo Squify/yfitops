@@ -70,7 +70,8 @@ export default class Playlist extends Component {
                     <div className="col-3">
                         {
                             this.state.playlist.image_path ?
-                                <Image src={`images/${this.state.playlist.image_path}`} className="playlist-default playlist-cover"
+                                <Image src={`images/${this.state.playlist.image_path}`}
+                                       className="playlist-default playlist-cover"
                                        alt="Playlist image"/>
                                 :
                                 <Image src='images/playlist-default.png' className="playlist-default playlist-cover"
@@ -84,7 +85,7 @@ export default class Playlist extends Component {
                             ━ 4H30</small>
 
                         <div className="header-buttons">
-                            { this.state.playlist.musicsId.length > 0 && <Button>Lire</Button> }
+                            {this.state.playlist.musicsId.length > 0 && <Button>Lire</Button>}
                             <Button>Enregistrer</Button>
                         </div>
                     </div>

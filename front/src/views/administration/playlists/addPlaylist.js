@@ -42,21 +42,15 @@ export default class AddPlaylist extends Component {
 
     async submit(e) {
         e.preventDefault();
-        let playlist = {
-            name: this.state.name,
-            musicsId: this.state.musicsId,
-            image_path: this.state.image_path,
-        };
-        playlist.public = this.state.public;
 
         let formData = new FormData();
-        formData.append('name', playlist.name);
-        formData.append('musicsId', playlist.musicsId);
-        formData.append('image_path', playlist.image_path);
-        formData.append('public', playlist.public);
+        formData.append('name', this.state.name);
+        formData.append('musicsId', this.state.musicsId);
+        formData.append('image_path', this.state.image_path);
+        formData.append('public', this.state.public);
 
         try {
-            await PlaylistService.create(formData, playlist);
+            await PlaylistService.create(formData);
             this.props.history.push('/admin/playlists');
         } catch (e) {
             console.error(e);
