@@ -69,7 +69,7 @@ export default class UpdatePlaylist extends Component {
         formData.append('public', playlist.public);
 
         try {
-            await PlaylistService.update(formData, playlist);
+            await PlaylistService.update(formData, playlist._id);
             this.props.history.push('/admin/playlists');
         } catch (e) {
             console.error(e);
@@ -84,7 +84,8 @@ export default class UpdatePlaylist extends Component {
             <form onSubmit={(e) => this.submit(e)}>
                 <div className="form-group">
                     <label>Nom</label>
-                    <input type="text" id="name" required className="form-control" value={this.state.name ? this.state.name : undefined}
+                    <input type="text" id="name" required className="form-control"
+                           value={this.state.name ? this.state.name : undefined}
                            onChange={(e) => this.handleChange(e)}/>
                 </div>
                 <Row>
@@ -111,7 +112,8 @@ export default class UpdatePlaylist extends Component {
                 </Row>
                 <div className="form-group">
                     <label>Image path</label>
-                    <input type="text" id="image_path" required className="form-control" value={this.state.image_path ? this.state.image_path : undefined}
+                    <input type="text" id="image_path" required className="form-control"
+                           value={this.state.image_path ? this.state.image_path : undefined}
                            onChange={(e) => this.handleChange(e)}/>
                 </div>
 

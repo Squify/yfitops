@@ -20,12 +20,11 @@ export default class AddCategory extends Component {
     async submit(e) {
         e.preventDefault();
         let {name} = this.state;
-        let category = {name};
 
         let formData = new FormData();
         formData.append('name', name);
         try {
-            await CategoryService.create(formData, category);
+            await CategoryService.create(formData);
             this.props.history.push('/admin/categories');
         } catch (e) {
             console.error(e);
