@@ -18,36 +18,25 @@ import { connect } from 'react-redux';
 
 class App extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         connected: !!localStorage.getItem('token')
-    //     }
-    // }
-
     componentDidMount() {
         console.log(this.props.user);
     }
 
     render() {
-        return <BrowserRouter>
+        return (<BrowserRouter>
             <div className="container-fluid">
-                { !this.props.user ? 
-                    <Row>
-                        <Col xs={2}/>
-                        <Col xs={8}>
-                            <Route exact path="/login" component={Login}/>
+                <Row>
+                    <Col xs={2} id="sidebar-wrapper">
+                        <Menu/>
+                    </Col>
+                    
+                    { !this.props.user ? 
+                        <Col>
+                            <Route exact path="/login" component={Login}/> 
                         </Col>
-                        <Col xs={2}/>
-                    </Row>
-                    :
-                    <Row>
-                        <Col xs={2} id="sidebar-wrapper">
-                            <Menu/>
-                        </Col>
-                        <Col xs={10} id="page-content-wrapper">
+                        : 
+                        <Col>
                             <Route exact path="/" component={Homepage}/>
-
                             <Route exact path="/admin/:page" component={Administration}/>
                             <Route exact path="/admin/musics/add" component={AddMusic}/>
                             <Route exact path="/admin/musics/update/:_id" component={UpdateMusic}/>
@@ -55,14 +44,14 @@ class App extends Component {
                             <Route exact path="/admin/playlists/update/:_id" component={UpdatePlaylist}/>
                             <Route exact path="/admin/categories/add" component={AddCategory}/>
                             <Route exact path="/admin/categories/update/:_id" component={UpdateCategory}/>
-
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/playlist/:name" component={Playlist}/>
                         </Col>
-                    </Row>
-                }
+                    }                    
+                    
+                </Row>
                 </div>
-        </BrowserRouter>
+        </BrowserRouter>)
     }
 }
 const mapStateToProps = state => {
