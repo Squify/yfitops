@@ -13,11 +13,22 @@ class Menu extends Component {
 
     constructor(props) {
         super(props);
-        const playlists = PlaylistService.getPlaylists();
+        
         this.state = ({
-            publicPlaylists: playlists.filter(playlist => playlist.public === true),
-            privatePlaylists: playlists.filter(playlist => playlist.public === false),
+            publicPlaylists: [],
+            privatePlaylists: []
         });
+    }
+
+    async componentDidMount(){
+
+        let responsePrivate = await PlaylistService.getPrivatePlaylists();
+        let responsePublic = await PlaylistService.getPublicPlaylists();
+
+        this.setState({
+            publicPlaylists: responsePublic.data.playlists,
+            privatePlaylists: responsePrivate.data.playlists,
+        })
     }
 
     logout(){
@@ -38,7 +49,7 @@ class Menu extends Component {
                         <Nav className="mr-auto test">
                             <NavLink exact to={'/'} className="nav-link"><HiHome/> Accueil</NavLink>
                             <NavLink exact to={'/profile'} className="nav-link"><HiUser/> Profil</NavLink>
-                            <Link className="nav-link" onClick={() => this.logout()}><HiLogout/> Logout</Link>
+                            <NavLink to={'/logout'} className="nav-link" onClick={() => this.logout()}><HiLogout/> Logout</NavLink>
                             <NavLink to={'/admin/musics'} className="nav-link"><HiCog/> Administration</NavLink>
                             <hr/>
                             <div className={"playlists-container"}>

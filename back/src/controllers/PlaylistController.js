@@ -52,7 +52,7 @@ export default class PlaylistController {
             let playlists = await Playlist.find({ userId: idUser }).select('-__v').populate({
                 path: "musics",
                 populate: { path: "categories" }
-            });;
+            });
 
             // let playlists = await Playlist.find({ userId: "5fdf979153d7cd586c241fa4" }).select('-__v');
 
@@ -211,9 +211,12 @@ export default class PlaylistController {
                     }
                 }
 
-                await playlist.update(req.body);
+                Object.assign(playlist, req.body)
 
                 await playlist.save();
+                
+                await playlist.update(req.body);
+
 
             } else {
                 new Error({

@@ -15,7 +15,7 @@ const jwt = () => {
         .unless({
             //Les routes qui n'ont pas besoin d'un token
             path: [
-                // /^\/uploads\/.*/,
+                /^\/uploads\/.*/,
                 /^\/users\/auth/,
                 /^\/users\/register/,
                 /^\/api-docs\/.*/
