@@ -67,7 +67,7 @@ export default class CategoryController {
         let status = 200;
         let body = {};
 
-        console.log(req.body);
+        // console.log(req.body);
 
         try {
             let { id } = req.params;

@@ -7,7 +7,7 @@ export default class Multer {
 
     static upload(uploadPath, identifier = null) {
         return (req, res, next) => {
-            console.log(identifier);
+            // console.log(identifier);
             // let subDir = identifier.split("_")[0];
 
             const storage = multer.diskStorage({
