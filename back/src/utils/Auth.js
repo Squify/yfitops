@@ -9,14 +9,12 @@ export default class Auth {
 
             try {
 
+                // Récupérer l'utilisateur connecté
                 let token = req.headers.authorization.replace(/Bearer /g, '');
-
                 let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
-
                 let id = decryptToken.sub;
-
                 let user = await User.findById(decryptToken.sub);
-                
+
                 if (roles.includes(user.role)) {
                     next()
                 } else {
@@ -32,5 +30,8 @@ export default class Auth {
         }
 
     }
+
+
+
 
 }
