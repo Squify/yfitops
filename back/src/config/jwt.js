@@ -17,6 +17,7 @@ const jwt = () => {
             path: [
                 // /^\/uploads\/.*/,
                 /^\/users\/auth/,
+                /^\/users\/register/,
                 /^\/api-docs\/.*/
             ]
         });

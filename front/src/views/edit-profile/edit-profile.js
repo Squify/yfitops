@@ -2,7 +2,7 @@ import './edit-profile.css'
 
 import React, {Component} from 'react';
 import {Col, Row} from "react-bootstrap";
-import { HiPhotograph, HiOutlineCheckCircle } from "react-icons/hi";
+import {HiOutlineCheckCircle, HiPhotograph} from "react-icons/hi";
 
 export default class EditProfile extends Component {
     render() {
