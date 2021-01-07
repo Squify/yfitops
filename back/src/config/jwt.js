@@ -18,7 +18,7 @@ const jwt = () => {
                 /^\/uploads\/.*/,
                 /^\/users\/auth/,
                 /^\/users\/register/,
-                /^\/api-docs\/.*/
+                /^\/api-docs\/*/
             ]
         });
 };
