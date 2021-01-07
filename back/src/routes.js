@@ -3,6 +3,7 @@ import CategoryController from './controllers/CategoryController';
 import MusicController from './controllers/MusicController';
 import PlaylistController from './controllers/PlaylistController';
 import UserController from './controllers/UserController';
+import Auth from './utils/Auth';
 import Multer from './utils/Multer';
 
 const router = Router();
@@ -11,7 +12,7 @@ const router = Router();
  * Routes User
  */
 
-router.get('/users', UserController.list);
+router.get('/users', Auth.isAllowed([10]), UserController.list);
 router.get('/users/:id', UserController.details);
 router.post('/users/auth', UserController.auth);
 router.post('/users', UserController.store);
