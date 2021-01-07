@@ -2,14 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import rootReducer from './rootReducer';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import storage from 'redux-persist/lib/storage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react"
+
+const persistConfig = { key: 'root', storage }
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>,
-    document.getElementById('root')
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
