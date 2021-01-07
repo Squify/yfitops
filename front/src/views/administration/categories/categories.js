@@ -11,6 +11,15 @@ class Categories extends Component {
         this.state = ({categories: CategoryService.getCategories()});
     }
 
+    async deleteCategory(id) {
+        try {
+            await CategoryService.delete(id);
+            this.setState({playlists: CategoryService.getCategories()});
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     render() {
         return (
             <div>
@@ -44,7 +53,9 @@ class Categories extends Component {
                                                 <Button style={{marginRight: 10}}
                                                         variant="dark"><HiPencil/></Button>
                                             </Link>
-                                            <Button variant="dark"><HiTrash/></Button>
+                                            <Button variant="dark" onClick={() => this.deleteCategory(category._id)}>
+                                                <HiTrash/>
+                                            </Button>
                                         </td>
                                     </tr>
                                 })

@@ -1,11 +1,7 @@
 .admin-menu {
-    background-color: #3C3C3C!important;
+    background-color: #3C3C3C !important;
     border-radius: 5px;
     margin: 0 -30px 20px -30px;
     display: flex;
     justify-content: space-between;
-}
-
-.admin-menu .navbar-nav {
-
 }

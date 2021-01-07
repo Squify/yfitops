@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Table, Col, Row} from "react-bootstrap";
+import {Button, Col, Row, Table} from "react-bootstrap";
 import MusicService from "../../../services/music.service";
-import {HiPencil, HiTrash, HiPlusCircle} from "react-icons/hi";
+import {HiPencil, HiPlusCircle, HiTrash} from "react-icons/hi";
 import {Link} from "react-router-dom";
 
 class Musics extends Component {
@@ -9,6 +9,15 @@ class Musics extends Component {
     constructor(props) {
         super(props);
         this.state = ({musics: MusicService.getMusics()});
+    }
+
+    async deleteMusic(id) {
+        try {
+            await MusicService.delete(id);
+            this.setState({playlists: MusicService.getMusics()});
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     render() {
@@ -53,7 +62,9 @@ class Musics extends Component {
                                                 <Button style={{marginRight: 10}}
                                                         variant="dark"><HiPencil/></Button>
                                             </Link>
-                                            <Button variant="dark"><HiTrash/></Button>
+                                            <Button variant="dark" onClick={() => this.deleteMusic(music._id)}>
+                                                <HiTrash/>
+                                            </Button>
                                         </td>
                                     </tr>
                                 })

@@ -11,6 +11,15 @@ class Playlists extends Component {
         this.state = ({playlists: PlaylistService.getPlaylists()});
     }
 
+    async deletePlaylist(id) {
+        try {
+            await PlaylistService.delete(id);
+            this.setState({playlists: PlaylistService.getPlaylists()});
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     render() {
         return (
             <div>
@@ -46,11 +55,11 @@ class Playlists extends Component {
                                         <td>{playlist._id}</td>
                                         <td>{playlist.name}</td>
                                         <td>{playlist.userId ? playlist.userId : '━'}</td>
-                                        <td style={{ textAlign: "center" }}>{playlist.public ?
-                                            <Image src={`images/public.png`} style={{ width: 25, height: 25}}
+                                        <td style={{textAlign: "center"}}>{playlist.public ?
+                                            <Image src={`images/public.png`} style={{width: 25, height: 25}}
                                                    alt="Playlist image"/>
                                             :
-                                            <Image src={`images/private.png`} style={{ width: 25, height: 25}}
+                                            <Image src={`images/private.png`} style={{width: 25, height: 25}}
                                                    alt="Playlist image"/>
                                         }</td>
                                         <td>{playlist.musicsId.length > 0 ? playlist.musicsId : '━'}</td>
@@ -61,7 +70,9 @@ class Playlists extends Component {
                                                 <Button style={{marginRight: 10}}
                                                         variant="dark"><HiPencil/></Button>
                                             </Link>
-                                            <Button variant="dark"><HiTrash/></Button>
+                                            <Button variant="dark" onClick={() => this.deletePlaylist(playlist._id)}>
+                                                <HiTrash/>
+                                            </Button>
                                         </td>
                                     </tr>
                                 })
