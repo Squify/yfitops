@@ -29,15 +29,10 @@ class Login extends Component {
         let body = {email, password};
 
         try {
-            console.log(1);
             let response = await UserService.auth(body);
-            console.log(2);
             let {token} = response.data;
-            console.log(3);
             localStorage.setItem('token', token);
-            console.log(4);
             this.props.updateUser(response.data.user);
-            console.log(5);
             this.props.history.push('/');
         } catch (e) {
             console.error(e);
