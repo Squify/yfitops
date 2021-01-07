@@ -110,6 +110,14 @@ export default class CategoryController {
             let { id } = req.params;
             let music = await Music.findByIdAndDelete(id);
 
+            if (fs.existsSync(`./${music.image_path}`)) {
+                await fs.unlinkSync(`./${music.image_path}`)
+            }
+
+            if (fs.existsSync(`./${music.sound_path}`)) {
+                await fs.unlinkSync(`./${music.sound_path}`)
+            }
+
 
         } catch (e) {
             status = status !== 200 ? status : 500;
