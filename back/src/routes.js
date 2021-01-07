@@ -35,7 +35,7 @@ router.delete('/musics/:id', Auth.isAllowed([10]), MusicController.remove);
  */
 
 router.get('/playlists', Auth.isAllowed([10]), PlaylistController.list);
-router.get('/playlists/private', Auth.isAllowed([0,10]), PlaylistController.listMine);
+router.get('/playlists/private', Auth.isAllowed([0,10]), PlaylistController.listPrivate);
 router.get('/playlists/public', PlaylistController.listPublic);
 router.get('/playlists/:id', Auth.isAllowed([10]), PlaylistController.details);
 router.post('/playlists', Multer.upload("playlists"), PlaylistController.store);
