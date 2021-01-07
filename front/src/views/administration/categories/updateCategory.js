@@ -42,7 +42,7 @@ export default class UpdateCategory extends Component {
         formData.append('name', name);
 
         try {
-            await MusicService.update(formData, category);
+            await MusicService.update(formData, category._id);
             this.props.history.push('/admin/categories');
         } catch (e) {
             console.error(e);

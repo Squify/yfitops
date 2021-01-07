@@ -33,7 +33,7 @@ router.delete('/musics/:id', MusicController.remove);
  */
 
 router.get('/playlists', PlaylistController.list);
-router.get('/playlists/mine', PlaylistController.listMine);
+router.get('/playlists/private', PlaylistController.listPrivate);
 router.get('/playlists/public', PlaylistController.listPublic);
 router.get('/playlists/:id', PlaylistController.details);
 router.post('/playlists', PlaylistController.store);

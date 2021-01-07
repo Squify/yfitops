@@ -41,7 +41,6 @@ export default class AddMusic extends Component {
     async submit(e) {
         e.preventDefault();
         let {name, category, sound_path, artiste, album, time} = this.state;
-        let music = {name, category, sound_path, artiste, album, time};
 
         let formData = new FormData();
         formData.append('name', name);
@@ -52,7 +51,7 @@ export default class AddMusic extends Component {
         formData.append('time', time);
 
         try {
-            await MusicService.create(formData, music);
+            await MusicService.create(formData);
             this.props.history.push('/admin/musics');
         } catch (e) {
             console.error(e);

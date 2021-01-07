@@ -1,56 +1,59 @@
 .playlist-default {
-    height: 100%;
-    width: 100%;
-    border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
 }
 
 .playlist-test {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    .header-buttons {
-        position: absolute;
-        bottom: 0;
-        button {
-            background-color: #e1289f!important;
-            border: #c12386 !important;
-            margin-right: 15px;
-        }
+  .header-buttons {
+    position: absolute;
+    bottom: 0;
+
+    button {
+      background-color: #e1289f !important;
+      border: #c12386 !important;
+      margin-right: 15px;
     }
+  }
 }
 
 .playlist-container {
-    width: 100%;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 2px solid #282828;
-    
-    .table {
-        color: whitesmoke!important;
-        .table-header {
-            font-variant: small-caps;
-            border: none!important;
-            border-top: none!important;
-        }
-        td, .table th {
-            padding: .75rem;
-            vertical-align: top;
-            border-top: 1px solid #282828!important;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #282828;
 
-        }
+  .table {
+    color: whitesmoke !important;
+
+    .table-header {
+      font-variant: small-caps;
+      border: none !important;
+      border-top: none !important;
     }
+
+    td, .table th {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid #282828 !important;
+
+    }
+  }
 }
 
 
 .music-tr:hover {
-    background-color: #282828!important;
-    color: whitesmoke!important;
+  background-color: #282828 !important;
+  color: whitesmoke !important;
 }
 
 .playlist-cover {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    object-position: center;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
 }

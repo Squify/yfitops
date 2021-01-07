@@ -3,7 +3,7 @@ import PlaylistCard from '../components/playlist-card/playlist-card';
 import EditProfile from '../edit-profile/edit-profile';
 
 import React, {Component} from 'react';
-import {Image, Tabs, Tab} from 'react-bootstrap';
+import {Image, Tab, Tabs} from 'react-bootstrap';
 
 export default class Profile extends Component {
     render() {

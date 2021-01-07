@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './register.scss'
 import {Button, Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import MusicService from "../../services/music.service";
 import UserService from "../../services/user.service";
 
 export default class Register extends Component {

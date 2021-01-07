@@ -28,7 +28,7 @@ export default class App extends Component {
     render() {
         return <BrowserRouter>
             <div className="container-fluid">
-                { !this.state.connected ?
+                {!this.state.connected ?
                     <Row>
                         <Col xs={2}/>
                         <Col xs={8}>
