@@ -2,8 +2,44 @@ import React, {Component} from 'react';
 import './register.scss'
 import {Button, Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import MusicService from "../../services/music.service";
+import UserService from "../../services/user.service";
 
 export default class Register extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            lastname: null,
+            firstname: null,
+            email: null,
+            password: null
+        }
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.id]: e.target.value
+        });
+    }
+
+    async submit(e) {
+        e.preventDefault();
+        let {lastname, firstname, email, password} = this.state;
+
+        let formData = new FormData();
+        formData.append('lastname', lastname);
+        formData.append('firstname', firstname);
+        formData.append('email', email);
+        formData.append('password', password);
+
+        try {
+            await UserService.create(formData);
+            this.props.history.push('/login');
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     render() {
         return (
