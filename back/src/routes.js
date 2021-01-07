@@ -15,9 +15,9 @@ const router = Router();
 router.get('/users', Auth.isAllowed([10]), UserController.list);
 router.get('/users/:id', UserController.details);
 router.post('/users/auth', UserController.auth);
-router.post('/users', UserController.store);
-router.put('/users/:id', UserController.update);
-router.delete('/users/:id', UserController.remove);
+router.post('/users', Auth.isAllowed([10]), UserController.store);
+router.put('/users/:id', Auth.isAllowed([10]), UserController.update);
+router.delete('/users/:id', Auth.isAllowed([10]), UserController.remove);
 
 /**
  * Routes Music
@@ -26,30 +26,30 @@ router.delete('/users/:id', UserController.remove);
 router.get('/musics', MusicController.list);
 router.get('/musics/:id', MusicController.details);
 // router.post('/musics', Multer.upload("musics", "image_path"), Multer.upload("musics", "sound_path"), MusicController.store);
-router.post('/musics', Multer.upload("musics"), MusicController.store);
-router.put('/musics/:id', Multer.upload("musics"), MusicController.update);
-router.delete('/musics/:id', MusicController.remove);
+router.post('/musics', Auth.isAllowed([10]), Multer.upload("musics"), MusicController.store);
+router.put('/musics/:id', Auth.isAllowed([10]), Multer.upload("musics"), MusicController.update);
+router.delete('/musics/:id', Auth.isAllowed([10]), MusicController.remove);
 
 /**
  * Routes Playlist
  */
 
-router.get('/playlists', PlaylistController.list);
-router.get('/playlists/mine', PlaylistController.listMine);
+router.get('/playlists', Auth.isAllowed([10]), PlaylistController.list);
+router.get('/playlists/mine', Auth.isAllowed([0,10]), PlaylistController.listMine);
 router.get('/playlists/public', PlaylistController.listPublic);
-router.get('/playlists/:id', PlaylistController.details);
+router.get('/playlists/:id', Auth.isAllowed([10]), PlaylistController.details);
 router.post('/playlists', PlaylistController.store);
-router.put('/playlists/:id', PlaylistController.update);
-router.delete('/playlists/:id', PlaylistController.remove);
+router.put('/playlists/:id', Auth.isAllowed([10]), PlaylistController.update);
+router.delete('/playlists/:id', Auth.isAllowed([10]), PlaylistController.remove);
 
 /**
  * Routes Category
  */
 
-router.get('/categories', CategoryController.list);
-router.get('/categories/:id', CategoryController.details);
-router.post('/categories', CategoryController.store);
-router.put('/categories/:id', CategoryController.update);
-router.delete('/categories/:id', CategoryController.remove);
+router.get('/categories', Auth.isAllowed([10]), CategoryController.list);
+router.get('/categories/:id', Auth.isAllowed([10]), CategoryController.details);
+router.post('/categories', Auth.isAllowed([10]), CategoryController.store);
+router.put('/categories/:id', Auth.isAllowed([10]), CategoryController.update);
+router.delete('/categories/:id', Auth.isAllowed([10]), CategoryController.remove);
 
 export default router;

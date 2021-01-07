@@ -69,8 +69,29 @@ export default class UserController {
         let body = {};
 
         try {
+
             let { id } = req.params;
-            let user = await User.findByIdAndUpdate(id, req.body, { new: true }).select('-__v -password').populate("playlists").populate("favorites");
+
+            let token = req.headers.authorization.replace(/Bearer /g, '');
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            let connectedId = decryptToken.sub;
+            let connectedUser = await User.findById(connectedId);
+
+            let user;
+            if (connectedId === id || connectedUser.role == 10) {
+
+                user = await User.findByIdAndUpdate(id, req.body, { new: true }).select('-__v -password').populate("playlists").populate("favorites");
+                
+            } else {
+                
+                new Error({
+                    error: "Users update",
+                    message: "You can only update your own profile"
+                });
+
+            }
+
+            // let user = await User.findById(decryptToken.sub);
 
             body = { user };
 
@@ -90,14 +111,32 @@ export default class UserController {
 
         try {
             let { id } = req.params;
-            let user = await User.findByIdAndDelete(id);
+
+            let token = req.headers.authorization.replace(/Bearer /g, '');
+            let decryptToken = jsonwebtoken.decode(token, process.env.JWT_SECRET);
+            let connectedId = decryptToken.sub;
+
+            let connectedUser = await User.findById(connectedId);
+
+            if (connectedId === id || connectedUser.role == 10) {
+                
+                await User.findByIdAndDelete(id);
+
+            } else {
+                
+                new Error({
+                    error: "Users delete",
+                    message: "You can only delete your own profile"
+                })
+
+            }
 
 
         } catch (e) {
             status = status !== 200 ? status : 500;
             body = {
-                error: e.error || 'Users update',
-                message: e.message || 'An error has occured into user updating'
+                error: e.error || 'Users delete',
+                message: e.message || 'An error has occured into user deleting'
             };
         }
         return res.status(status).json(body);
