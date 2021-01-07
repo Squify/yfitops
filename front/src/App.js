@@ -14,20 +14,25 @@ import AddPlaylist from "./views/administration/playlists/addPlaylist";
 import AddCategory from "./views/administration/categories/addCategory";
 import UpdateCategory from "./views/administration/categories/updateCategory";
 import Login from "./views/login/login";
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            connected: !!localStorage.getItem('token')
-        }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         connected: !!localStorage.getItem('token')
+    //     }
+    // }
+
+    componentDidMount() {
+        console.log(this.props.user);
     }
 
     render() {
         return <BrowserRouter>
             <div className="container-fluid">
-                { !this.state.connected ?
+                { !this.props.user ? 
                     <Row>
                         <Col xs={2}/>
                         <Col xs={8}>
@@ -56,7 +61,12 @@ export default class App extends Component {
                         </Col>
                     </Row>
                 }
-            </div>
+                </div>
         </BrowserRouter>
     }
 }
+const mapStateToProps = state => {
+    return { user: state.user };
+}
+
+export default connect(mapStateToProps, null)(App)
