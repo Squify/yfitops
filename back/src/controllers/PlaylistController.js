@@ -269,7 +269,7 @@ export default class PlaylistController {
 
             } else {
 
-                console.log("bka");
+                // console.log("bka");
                 new Error({
                     error: "Private playlist",
                     message: "Cette playlist n'est pas la vôtre et n'est pas publique."
