@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, Nav, Navbar} from 'react-bootstrap';
-import {HiCog, HiHome, HiUser} from "react-icons/hi";
+import {HiCog, HiHome, HiUser, HiLogout} from "react-icons/hi";
+import {FiLogIn} from "react-icons/fi"
 import {NavLink, Link, withRouter} from "react-router-dom";
 import './menu.scss';
 import PlaylistService from "../../../services/playlist.service";
@@ -37,7 +38,7 @@ class Menu extends Component {
                         <Nav className="mr-auto test">
                             <NavLink exact to={'/'} className="nav-link"><HiHome/> Accueil</NavLink>
                             <NavLink exact to={'/profile'} className="nav-link"><HiUser/> Profil</NavLink>
-                            <Link className="nav-link" onClick={() => this.logout()}>Logout</Link>
+                            <Link className="nav-link" onClick={() => this.logout()}><HiLogout/> Logout</Link>
                             <NavLink to={'/admin/musics'} className="nav-link"><HiCog/> Administration</NavLink>
                             <hr/>
                             <div className={"playlists-container"}>
@@ -60,7 +61,7 @@ class Menu extends Component {
                         </Nav>
                     ) : (
                         <Nav className="mr-auto test">
-                            <NavLink exact to={'/login'} className="nav-link">Login</NavLink>
+                            <NavLink exact to={'/login'} className="nav-link"><FiLogIn/> Login</NavLink>
                         </Nav>
                     )
                 }  
