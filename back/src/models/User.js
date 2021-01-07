@@ -23,10 +23,6 @@ const UserSchema = new Schema({
         type: Number,
         default: 0
     },
-    playlists: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Playlist'
-    }],
     favorites: [{
         type: Schema.Types.ObjectId,
         ref: 'Music'

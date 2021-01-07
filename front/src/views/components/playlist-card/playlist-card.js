@@ -9,7 +9,7 @@ export default class PlaylistCard extends Component {
             <Card style={{width: '18rem', border: 0, margin: 10}}>
                 {
                     this.props.image ?
-                        <Card.Img className={"cover-image"} variant="top" src={`images/${this.props.image}`}/>
+                        <Card.Img className={"cover-image"} variant="top" src={`${process.env.REACT_APP_HOST_API}/${this.props.image}`}/>
                         :
                         <Card.Img className={"cover-image"} variant="top" src='images/playlist-default.png'/>
                 }

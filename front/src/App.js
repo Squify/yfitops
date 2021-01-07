@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 class App extends Component {
 
     componentDidMount() {
-        console.log(this.props.user);
+        // console.log(this.props.user);
     }
 
     render() {

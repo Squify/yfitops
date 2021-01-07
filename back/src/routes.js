@@ -13,9 +13,9 @@ const router = Router();
  */
 
 router.get('/users', Auth.isAllowed([10]), UserController.list);
+router.post('/users/register', UserController.store);
 router.get('/users/:id', UserController.details);
 router.post('/users/auth', UserController.auth);
-router.post('/users', Auth.isAllowed([10]), UserController.store);
 router.put('/users/:id', Auth.isAllowed([10]), UserController.update);
 router.delete('/users/:id', Auth.isAllowed([10]), UserController.remove);
 
@@ -35,9 +35,9 @@ router.delete('/musics/:id', Auth.isAllowed([10]), MusicController.remove);
  */
 
 router.get('/playlists', Auth.isAllowed([10]), PlaylistController.list);
-router.get('/playlists/private', Auth.isAllowed([0,10]), PlaylistController.listMine);
+router.get('/playlists/private', Auth.isAllowed([0,10]), PlaylistController.listPrivate);
 router.get('/playlists/public', PlaylistController.listPublic);
-router.get('/playlists/:id', Auth.isAllowed([10]), PlaylistController.details);
+router.get('/playlists/:id', PlaylistController.details);
 router.post('/playlists', Multer.upload("playlists"), PlaylistController.store);
 router.put('/playlists/:id', Auth.isAllowed([10]), Multer.upload("playlists"), PlaylistController.update);
 router.delete('/playlists/:id', Auth.isAllowed([10]), PlaylistController.remove);

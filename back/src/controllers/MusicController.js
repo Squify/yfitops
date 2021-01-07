@@ -67,8 +67,6 @@ export default class CategoryController {
         let status = 200;
         let body = {};
 
-        // console.log(req.body);
-
         try {
             let { id } = req.params;
             let music = await Music.findById(id).select('-__v').populate("categories");
@@ -86,9 +84,12 @@ export default class CategoryController {
                 }
             }
 
-            await music.update(req.body);
+            Object.assign(music, req.body);
 
             await music.save();
+
+            await music.update(req.body);
+
 
             body = { music };
 

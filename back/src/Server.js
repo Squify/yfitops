@@ -35,7 +35,7 @@ class Server {
         // });
         app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-        // app.use('/uploads', express.static('uploads'));
+        app.use('/uploads', express.static('uploads'));
 
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());

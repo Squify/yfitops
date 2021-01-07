@@ -8,12 +8,21 @@ export default class Homepage extends Component {
 
     constructor(props) {
         super(props);
-        const playlists = PlaylistService.getPlaylists();
         this.state = ({
-            recentPlaylists: playlists.slice(0, 8),
-            popularPlaylists: playlists.sort((a, b) => b.listening - a.listening).slice(0, 5),
+            recentPlaylists: [],
+            popularPlaylists: []
         });
     }
+
+    async componentDidMount(){
+        let response = await PlaylistService.getPlaylists();
+        
+        this.setState({
+            recentPlaylists: response.data.playlists.slice(0, 8),
+            popularPlaylists: response.data.playlists.sort((a, b) => b.listening - a.listening).slice(0, 5)
+        })
+    }
+
 
     render() {
         return (
