@@ -1,13 +1,13 @@
 .form-control {
-    color: #FFFFFF!important;
-    border-color: #474747!important;
-    background-color: #282828!important;
+    color: #FFFFFF !important;
+    border-color: #474747 !important;
+    background-color: #282828 !important;
 }
 
 .form-control:focus {
-    color: #FFFFFF!important;
-    border-color: #6e6e6e!important;
-    background-color: #404040!important;
+    color: #FFFFFF !important;
+    border-color: #6e6e6e !important;
+    background-color: #404040 !important;
 }
 
 #thumbnail {

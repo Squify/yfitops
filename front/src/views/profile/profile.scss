@@ -1,38 +1,39 @@
 .profile-pic {
-    width: 150px;
-    height: 150px;
+  width: 150px;
+  height: 150px;
 }
 
 h6 {
-    font-variant: small-caps;
+  font-variant: small-caps;
 }
 
 .user-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .tab-content {
-    padding-top: 25px;
-    display: flex;
-    flex-direction: column;
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-tabs {
-    border: none!important;
+  border: none !important;
 
-    .nav-link {
-        color: #B3B3B3!important;
-        border: none!important;
-    }
-    .nav-link:hover {
-        border: none!important;
-        color: #FFFFFF!important;
-    }
+  .nav-link {
+    color: #B3B3B3 !important;
+    border: none !important;
+  }
 
-    .nav-link.active {
-        color: #FFFFFF!important;
-        background-color: transparent!important;
-        border: none!important;
-        box-shadow: 2px 22px 0px -19px #E1289F;
-    }
+  .nav-link:hover {
+    border: none !important;
+    color: #FFFFFF !important;
+  }
+
+  .nav-link.active {
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: 2px 22px 0px -19px #E1289F;
+  }
 }

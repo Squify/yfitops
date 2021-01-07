@@ -28,7 +28,7 @@ export default class PlaylistController {
 
     }
 
-    static async listMine(req, res) {
+    static async listPrivate(req, res) {
         let status = 200;
         let body = {};
 
