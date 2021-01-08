@@ -15,10 +15,14 @@ La page d'administration contient 4 onglets : "musiques", "playlists", "utilisat
 - Node JS
 - MongoDBCompass
 
-## Lancer le projet
+## Installer le projet
 ### Base de données
 Creer une base de données MongoDB
+
+### Configuration
 Configurer les fichiers .env dans les dossiers back et front
+
+### Lancer le projet
 Dans le dossier back:
 - npm install / yarn install
 - npm run dev / yarn dev
