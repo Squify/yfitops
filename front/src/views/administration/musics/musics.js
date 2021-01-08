@@ -14,8 +14,6 @@ class Musics extends Component {
     async componentDidMount() {
         let response = await MusicService.getMusics();
 
-        console.log(response.data);
-
         this.setState({
             musics: response.data.musics
         });
@@ -25,7 +23,7 @@ class Musics extends Component {
     async deleteMusic(id) {
         try {
             await MusicService.delete(id);
-            this.setState({ playlists: (await MusicService.getMusics()).data.musics });
+            this.setState({ musics: (await MusicService.getMusics()).data.musics });
         } catch (e) {
             console.error(e);
         }
@@ -51,23 +49,23 @@ class Musics extends Component {
                                 <th className="table-header">Id</th>
                                 <th className="table-header">Titre</th>
                                 <th className="table-header">Artiste</th>
-                                <th className="table-header">Album</th>
+                                {/* <th className="table-header">Album</th> */}
                                 <th className="table-header">Durée</th>
-                                <th className="table-header">Path</th>
+                                {/* <th className="table-header">Path</th> */}
                                 <th className="table-header">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 this.state.musics.length > 0 ?
-                                    this.state.musics.map(function (music, i) {
+                                    this.state.musics.map((music, i) => {
                                         return <tr className="music-tr" key={i}>
                                             <td>{music._id}</td>
                                             <td>{music.name}</td>
-                                            <td>{music.artiste}</td>
-                                            <td>{music.album}</td>
-                                            <td>{music.time}</td>
-                                            <td>{music.sound_path ? music.sound_path : '━'}</td>
+                                            <td>{music.artist}</td>
+                                            {/* <td>{music.album}</td> */}
+                                            <td>{music.duration}</td>
+                                            {/* <td>{music.sound_path ? music.sound_path : '━'}</td> */}
                                             <td>
                                                 <Link to={`/admin/musics/update/${music._id}`}>
                                                     <Button style={{ marginRight: 10 }}

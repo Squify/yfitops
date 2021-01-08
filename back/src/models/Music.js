@@ -22,10 +22,10 @@ const MusicSchema = new Schema({
         type: String,
         required: true
     },
-    categories: [{
+    category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
-    }],
+    },
     created_at: {
         type: Date,
         default: Date.now()

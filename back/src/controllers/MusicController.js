@@ -8,7 +8,7 @@ export default class CategoryController {
         let body = {};
 
         try {
-            let musics = await Music.find().select('-__v').populate("categories");
+            let musics = await Music.find().select('-__v').populate("category");
 
             body = { musics };
         } catch (e) {
@@ -29,7 +29,7 @@ export default class CategoryController {
 
         try {
             let { id } = req.params;
-            let music = await Music.findById(id).select('-__v').populate("categories");
+            let music = await Music.findById(id).select('-__v').populate("category");
 
             body = { music };
         } catch (e) {
@@ -69,7 +69,7 @@ export default class CategoryController {
 
         try {
             let { id } = req.params;
-            let music = await Music.findById(id).select('-__v').populate("categories");
+            let music = await Music.findById(id).select('-__v').populate("category");
             // let music = await Music.findByIdAndUpdate(id, req.body, { new: true }).select('-__v').populate("categories");
 
             if (req.body.image_path) {
