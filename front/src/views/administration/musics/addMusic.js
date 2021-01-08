@@ -53,10 +53,10 @@ export default class AddMusic extends Component {
     async submit(e) {
         e.preventDefault();
         let { name, category, sound_path, artist, image_path, duration } = this.state;
-
+        // console.log(category);
         let body = new FormData();
         body.append('name', name);
-        body.append('category', category);
+        body.append('category', category._id);
         body.append('sound_path', sound_path);
         body.append('image_path', image_path);
         body.append('artist', artist);

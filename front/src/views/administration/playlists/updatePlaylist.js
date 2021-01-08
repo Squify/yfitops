@@ -60,6 +60,12 @@ export default class UpdatePlaylist extends Component {
         }
     }
 
+    handleChangeImage(e) {
+        this.setState({
+            image_path: e.target.files[0]
+        });
+    }
+
     handleChangeMusic(e) {
         let newPlaylist = this.state.playlistMusics;
 
@@ -204,9 +210,8 @@ export default class UpdatePlaylist extends Component {
                 {/* </Col> */}
                 <div className="form-group">
                     <label>Image path</label>
-                    <input type="text" id="image_path" required className="form-control"
-                        value={this.state.image_path ? this.state.image_path : undefined}
-                        onChange={(e) => this.handleChange(e)} />
+                    <input type="file" id="image_path" required className="form-control"
+                        onChange={(e) => this.handleChangeImage(e)} />
                 </div>
 
                 <button type="submit" className="btn btn-primary">Enregistrer</button>

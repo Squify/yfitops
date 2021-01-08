@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Button, Image, Table } from 'react-bootstrap';
 import { HiHeart } from 'react-icons/hi';
 import MusicService from "../../services/music.service";
+import Player from '../components/player/player';
 
 export default class Playlist extends Component {
 
@@ -86,7 +87,8 @@ export default class Playlist extends Component {
                                     <th className="table-header" />
                                     <th className="table-header">Titre</th>
                                     <th className="table-header">Artiste</th>
-                                    <th className="table-header">Durée</th>
+                                    {/* <th className="table-header">Durée</th> */}
+                                    <th className="table-header">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +99,12 @@ export default class Playlist extends Component {
                                                 <td><HiHeart /></td>
                                                 <td>{music.name}</td>
                                                 <td>{music.artist}</td>
-                                                <td>{music.duration}min</td>
+                                                {/* <td>{music.duration}min</td> */}
+                                                <td><Player
+                                                    sound_path={music.sound_path}
+                                                    autoplay="false"
+                                                />
+                                                </td>
                                             </tr>
                                         })
                                         :
