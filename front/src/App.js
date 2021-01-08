@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Menu from "./views/components/menu/menu";
 import {Col, Row} from "react-bootstrap";
+import Player from "./views/components/player/player"
 import Playlist from "./views/playlist/playlist";
 import Profile from "./views/profile/profile";
 import Administration from "./views/administration/administration";
@@ -36,6 +37,7 @@ class App extends Component {
                         <Col>
                             <Route exact path="/login" component={Login}/> 
                             <Route exact path="/register" component={Register}/>
+                            <Route exact path="/player" component={Player}/>
                         </Col>
                         : 
                         <Col>
