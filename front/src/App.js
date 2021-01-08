@@ -49,7 +49,7 @@ class App extends Component {
                             <Route exact path="/admin/categories/update/:_id" component={UpdateCategory}/>
                             <Route exact path="/admin/users/update/:_id" component={UpdateUser}/>
                             <Route exact path="/profile" component={Profile}/>
-                            <Route exact path="/playlist/:name" component={Playlist}/>
+                            <Route exact path="/playlist/:_id" component={Playlist}/>
                         </Col>
                     }                    
                     
