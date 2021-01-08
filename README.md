@@ -37,4 +37,4 @@ Compléter les fichiers .env dans les dossiers back et front
 - Blocage sur certaines fonctionnalités du fait du manque de connaissances
 - Gérer des fichiers de champs multiples vers des dossiers multiples selon leur mimetype à partir sd'une seule fonction
 - Les updates d'entités contenant des fichiers entrainement la suppression du fichier précédent même quand celui ci n'a pas été modifié
-- 
+
