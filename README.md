@@ -18,9 +18,11 @@ La page d'administration contient 4 onglets : "musiques", "playlists", "utilisat
 ## Installer le projet
 ### Base de données
 Creer une base de données MongoDB
+Y importer les fichiers "categories.json" puis "users.json"
 
 ### Configuration
-Configurer les fichiers .env dans les dossiers back et front
+Dupliquer les fichiers .env.example et les renommer .env
+Compléter les fichiers .env dans les dossiers back et front
 
 ### Lancer le projet
 #### Dans le dossier back:
@@ -40,6 +42,8 @@ Configurer les fichiers .env dans les dossiers back et front
 </ol> 
 
 ## Difficultés rencontrées
-- Trouver du temps
-- Gérer des fichiers de champs multiples vers des dossiers multiples selon leur mimetype à partir d'une seule fonction
+- Manque de temps
+- Blocage sur certaines fonctionnalités du fait du manque de connaissances
+- Gérer des fichiers de champs multiples vers des dossiers multiples selon leur mimetype à partir sd'une seule fonction
+- Les updates d'entités contenant des fichiers entrainement la suppression du fichier précédent même quand celui ci n'a pas été modifié
 - 
