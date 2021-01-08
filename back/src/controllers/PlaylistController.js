@@ -12,8 +12,8 @@ export default class PlaylistController {
         try {
             let playlists = await Playlist.find().select('-__v').populate({
                 path: "musics",
-                populate: { path: "categories" }
-            });
+                populate: { path: "category" }
+            }).populate("userId");
 
             body = { playlists };
         } catch (e) {
@@ -51,8 +51,8 @@ export default class PlaylistController {
 
             let playlists = await Playlist.find({ userId: idUser }).select('-__v').populate({
                 path: "musics",
-                populate: { path: "categories" }
-            });
+                populate: { path: "category" }
+            }).populate("userId");
 
             // let playlists = await Playlist.find({ userId: "5fdf979153d7cd586c241fa4" }).select('-__v');
 
@@ -77,8 +77,8 @@ export default class PlaylistController {
         try {
             let playlists = await Playlist.find({ public: true }).select('-__v').populate({
                 path: "musics",
-                populate: { path: "categories" }
-            });;
+                populate: { path: "category" }
+            }).populate("userId");
 
             body = { playlists };
         } catch (e) {
@@ -101,8 +101,8 @@ export default class PlaylistController {
             let { id } = req.params;
             let playlist = await Playlist.findById(id).select('-__v').populate({
                 path: "musics",
-                populate: { path: "categories" }
-            });;
+                populate: { path: "category" }
+            }).populate("userId");
 
             // C'est commenté en attendant de mettre en place le JWT
 
@@ -185,8 +185,8 @@ export default class PlaylistController {
             let { id } = req.params;
             let playlist = await Playlist.findById(id).select('-__v').populate({
                 path: "musics",
-                populate: { path: "categories" }
-            });;
+                populate: { path: "category" }
+            }).populate("userId");
 
             // C'est commenté en attendant de mettre en place le JWT
 
@@ -210,6 +210,11 @@ export default class PlaylistController {
                         await fs.unlinkSync(`./${playlist.image_path}`)
                     }
                 }
+                // let newPlaylist = playlist.musics;
+                // newPlaylist.push(req.body);
+
+                
+                req.body.musics = req.body.musics.split(",");
 
                 Object.assign(playlist, req.body)
 

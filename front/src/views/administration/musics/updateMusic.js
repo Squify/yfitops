@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MusicService from "../../../services/music.service";
 import CategoryService from "../../../services/category.service";
-import {Col, Row} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import './admin-music.scss'
 
 export default class UpdateMusic extends Component {
@@ -12,9 +12,13 @@ export default class UpdateMusic extends Component {
             name: null,
             category: null,
             sound_path: null,
-            artiste: null,
-            album: null,
-            time: null,
+            prevSound: null,
+            image_path: null,
+            prevImage: null,
+            // forSound: null,
+            // forImage: null,
+            artist: null,
+            duration: null,
 
             categories: [],
         }
@@ -22,17 +26,22 @@ export default class UpdateMusic extends Component {
 
     async componentDidMount() {
         try {
-            let categories = await CategoryService.getCategories();
-            let music = await MusicService.getMusic(this.props.match.params._id);
+            let responseCategories = await CategoryService.getCategories();
+            let categories = responseCategories.data.categories;
+            let responseMusic = await MusicService.getMusic(this.props.match.params._id);
+            let music = responseMusic.data.music;
+            // console.log(categories);
             if (music)
                 this.setState({
-                    categories: categories,
+                    categories,
                     name: music.name,
                     category: music.category,
                     sound_path: music.sound_path,
-                    artiste: music.artiste,
-                    album: music.album,
-                    time: music.time
+                    image_path: music.image_path,
+                    // forSound: music.sound_path,
+                    // forImage: music.image_path,
+                    artist: music.artist,
+                    duration: music.duration,
                 });
             else this.props.history.push('/admin/musics')
         } catch (e) {
@@ -46,23 +55,40 @@ export default class UpdateMusic extends Component {
         });
     }
 
+    handleChangeImage(e) {
+        this.setState({
+            image_path: e.target.files[0]
+        });
+    }
+
+    handleChangeSound(e) {
+        this.setState({
+            sound_path: e.target.files[0]
+        });
+    }
+
     async submit(e) {
         e.preventDefault();
-        let {name, category, sound_path, artiste, album, time} = this.state;
-        let music = {name, category, sound_path, artiste, album, time};
-        music._id = parseInt(this.props.match.params._id);
+        let { name, category, sound_path, image_path, artist, duration } = this.state;
+        let id = this.props.match.params._id;
 
-        let formData = new FormData();
-        formData.append('_id', parseInt(this.props.match.params._id));
-        formData.append('name', name);
-        formData.append('category', parseInt(category));
-        formData.append('sound_path', sound_path);
-        formData.append('artiste', artiste);
-        formData.append('album', album);
-        formData.append('time', time);
+        let body = new FormData();
+        body.append('name', name);
+        // console.log(category);
+        body.append('category', category._id);
+        if(image_path !== null) {
+            body.append('image_path', image_path);
+        }
+        if(sound_path !== null) {
+            body.append('sound_path', sound_path);
+        }
+        body.append('artist', artist);
+        body.append('duration', duration);
+
+        // console.log(body);
 
         try {
-            await MusicService.update(formData, music);
+            await MusicService.update(body, id);
             this.props.history.push('/admin/musics');
         } catch (e) {
             console.error(e);
@@ -70,26 +96,31 @@ export default class UpdateMusic extends Component {
     }
 
     render() {
-        let {categories} = this.state;
+        let { categories } = this.state;
         return <div className="form-content">
             <h2>Formulaire d'édition de musique</h2>
-            <hr className="hr-form"/>
+            <hr className="hr-form" />
             <form onSubmit={(e) => this.submit(e)}>
                 <div className="form-group">
                     <label>Nom</label>
                     <input type="text" id="name" required className="form-control"
-                           value={this.state.name ? this.state.name : undefined}
-                           onChange={(e) => this.handleChange(e)}/>
+                        value={this.state.name ? this.state.name : undefined}
+                        onChange={(e) => this.handleChange(e)} />
                 </div>
                 <Row>
                     <Col>
                         <div className="form-group">
                             <label>Catégorie</label>
                             <select id="category" required className="form-control"
-                                    onChange={(e) => this.handleChange(e)}>
+                                onChange={(e) => this.handleChange(e)}>
                                 {
                                     categories.map((category, index) => {
-                                        return <option key={index} value={category._id}>{category.name}</option>
+                                        if (this.state.category._id === category._id) {
+                                            return <option key={index} value={category._id} selected>{category.name}</option>
+                                        } else {
+                                            return <option key={index} value={category._id}>{category.name}</option>
+                                        }
+
                                     })
                                 }
                             </select>
@@ -98,36 +129,48 @@ export default class UpdateMusic extends Component {
                     <Col xs={3}>
                         <div className="form-group">
                             <label>Durée</label>
-                            <input type="number" step="0.01" id="time" required className="form-control"
-                                   value={this.state.time ? this.state.time : undefined}
-                                   onChange={(e) => this.handleChange(e)}/>
+                            <input type="number" step="0.01" id="duration" required className="form-control"
+                                value={this.state.duration ? this.state.duration : undefined}
+                                onChange={(e) => this.handleChange(e)} />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={6}>
+                        <div className="form-group">
+                            <label>Image path</label>
+                            <input type="file" id="image_path" className="form-control"
+                                onChange={(e) => this.handleChange(e)} />
+                        </div>
+                        <div>
+                            <p style={{ fontSize: "12px" }}>
+                                {/* {this.state.forImage ? `Le chemin actuel est ${process.env.REACT_APP_HOST_API}/${this.state.forImage}` : "Il n'y a pas encore d'image"} */}
+                                {this.state.image_path ? `Le chemin actuel est ${process.env.REACT_APP_HOST_API}/${this.state.image_path}` : "Il n'y a pas encore d'image"}
+
+                            </p>
+                        </div>
+                    </Col>
+                    <Col xs={6}>
+                        <div className="form-group">
+                            <label>Sound path</label>
+                            <input type="file" id="sound_path" className="form-control"
+                                onChange={(e) => this.handleChange(e)} />
+                        </div>
+                        <div>
+                            <p style={{ fontSize: "12px" }}>
+                                {/* {this.state.forSound ? `Le chemin actuel est ${process.env.REACT_APP_HOST_API}/${this.state.forSound}` : "Il n'y a pas encore de son"} */}
+                                {this.state.sound_path ? `Le chemin actuel est ${process.env.REACT_APP_HOST_API}/${this.state.sound_path}` : "Il n'y a pas encore de son"}
+
+                            </p>
                         </div>
                     </Col>
                 </Row>
                 <div className="form-group">
-                    <label>Sound path</label>
-                    <input type="text" id="sound_path" required className="form-control"
-                           value={this.state.sound_path ? this.state.sound_path : undefined}
-                           onChange={(e) => this.handleChange(e)}/>
+                    <label>Artiste</label>
+                    <input type="text" id="artist" required className="form-control"
+                        value={this.state.artist ? this.state.artist : undefined}
+                        onChange={(e) => this.handleChange(e)} />
                 </div>
-                <Row>
-                    <Col>
-                        <div className="form-group">
-                            <label>Artiste</label>
-                            <input type="text" id="artiste" required className="form-control"
-                                   value={this.state.artiste ? this.state.artiste : undefined}
-                                   onChange={(e) => this.handleChange(e)}/>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="form-group">
-                            <label>Album</label>
-                            <input type="text" id="album" required className="form-control"
-                                   value={this.state.album ? this.state.album : undefined}
-                                   onChange={(e) => this.handleChange(e)}/>
-                        </div>
-                    </Col>
-                </Row>
 
                 <button type="submit" className="btn btn-primary">Enregistrer</button>
             </form>

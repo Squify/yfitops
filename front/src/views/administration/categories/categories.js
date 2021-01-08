@@ -25,8 +25,8 @@ class Categories extends Component {
         try {
             await CategoryService.delete(id);
             let response = await CategoryService.getCategories();
-            this.setState({ 
-                playlists: response.data.categories
+            this.setState({
+                categories: response.data.categories
             });
         } catch (e) {
             console.error(e);
@@ -57,7 +57,7 @@ class Categories extends Component {
                         <tbody>
                             {
                                 this.state.categories.length > 0 ?
-                                    this.state.categories.map(function (category, i) {
+                                    this.state.categories.map((category, i) => {
                                         return <tr className="music-tr" key={i}>
                                             <td>{category._id}</td>
                                             <td>{category.name}</td>

@@ -13,6 +13,7 @@ import UpdatePlaylist from "./views/administration/playlists/updatePlaylist";
 import AddPlaylist from "./views/administration/playlists/addPlaylist";
 import AddCategory from "./views/administration/categories/addCategory";
 import UpdateCategory from "./views/administration/categories/updateCategory";
+import UpdateUser from "./views/administration/users/updateUser";
 import Login from "./views/login/login";
 import Register from "./views/register/register";
 import { connect } from 'react-redux';
@@ -46,6 +47,7 @@ class App extends Component {
                             <Route exact path="/admin/playlists/update/:_id" component={UpdatePlaylist}/>
                             <Route exact path="/admin/categories/add" component={AddCategory}/>
                             <Route exact path="/admin/categories/update/:_id" component={UpdateCategory}/>
+                            <Route exact path="/admin/users/update/:_id" component={UpdateUser}/>
                             <Route exact path="/profile" component={Profile}/>
                             <Route exact path="/playlist/:name" component={Playlist}/>
                         </Col>
