@@ -17,6 +17,14 @@ La page d'administration contient 4 onglets : "musiques", "playlists", "utilisat
 
 ## Lancer le projet
 ### Base de données
+Creer une base de données MongoDB
+Configurer les fichiers .env dans les dossiers back et front
+Dans le dossier back:
+- npm install / yarn install
+- npm run dev / yarn dev
+Dans le dossier front
+- npm install
+- npm start
 
 ### Site web
 <ol>
