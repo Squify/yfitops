@@ -1,11 +1,13 @@
 import './profile.scss'
 import PlaylistCard from '../components/playlist-card/playlist-card';
 import EditProfile from '../edit-profile/edit-profile';
+import { connect } from 'react-redux';
 
 import React, {Component} from 'react';
 import {Image, Tab, Tabs} from 'react-bootstrap';
 
-export default class Profile extends Component {
+class Profile extends Component {
+
     render() {
         return (
             <div className="global-container">
@@ -25,7 +27,11 @@ export default class Profile extends Component {
                     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                         <Tab eventKey="home" title="Informations">
                             <div className="informations">
-                                <EditProfile/>
+                                <EditProfile 
+                                id={this.props.user._id}
+                                email={this.props.user.email}
+                                firstname={this.props.user.firstname}
+                                lastname={this.props.user.lastname}/>
                             </div>
                         </Tab>
                         <Tab eventKey="profile" title="Playlists">
@@ -44,3 +50,9 @@ export default class Profile extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return { user: state.user };
+}
+
+export default connect(mapStateToProps, null)(Profile)
