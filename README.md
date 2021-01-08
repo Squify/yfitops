@@ -30,16 +30,7 @@ Compléter les fichiers .env dans les dossiers back et front
 - npm run dev / yarn dev
 #### Dans le dossier front
 - npm install
-- npm start
-
-### Site web
-<ol>
-    <li>Vérifier que la base de données fonctionne</li>
-    <li>Se placer dans le dossier du FRONT : <code>cd front</code></li>
-    <li>Lancer la commande <code>npm install</code></li>
-    <li>Se placer dans le dossier de l'API : <code>cd ../back</code></li>
-    <li>Lancer la commande <code>npm install</code></li>
-</ol> 
+- npm start 
 
 ## Difficultés rencontrées
 - Manque de temps
