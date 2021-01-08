@@ -11,7 +11,7 @@ export default class UserController {
         try {
             let users = await User.find().select('-__v -password').populate({
                 path: "favorites",
-                populate: { path: "categories" }
+                populate: { path: "category" }
             });
 
             body = { users };
@@ -35,7 +35,7 @@ export default class UserController {
             let { id } = req.params;
             let user = await User.findById(id).select('-__v -password').populate({
                 path: "favorites",
-                populate: { path: "categories" }
+                populate: { path: "category" }
             });
 
             body = { user };
@@ -89,7 +89,7 @@ export default class UserController {
 
                 user = await User.findByIdAndUpdate(id, req.body, { new: true }).select('-__v -password').populate({
                     path: "favorites",
-                    populate: { path: "categories" }
+                    populate: { path: "category" }
                 });
                 
             } else {
@@ -163,7 +163,7 @@ export default class UserController {
                 email: email
             }).select("-__v").populate({
                 path: "favorites",
-                populate: { path: "categories" }
+                populate: { path: "category" }
             });
 
             if (user && password === user.password) {

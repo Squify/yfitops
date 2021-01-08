@@ -16,7 +16,7 @@ export default class Playlist extends Component {
                 name: null,
                 userId: null,
                 public: null,
-                musicsId: [],
+                musics: [],
                 image_path: null,
             },
             musics: []
@@ -36,17 +36,16 @@ export default class Playlist extends Component {
     }
 
     getPlaylist() {
-        let playlists = PlaylistService.getPlaylists();
-        this.state = ({uri: this.props.match.params.name})
-        let playlist = playlists.find(item => item.name === this.state.uri);
+        let playlist = await PlaylistService.getPlaylist(this.props.match.params._id);
+        
         if (playlist) {
             this.setState({
                 playlist: {
-                    id: playlist.id,
+                    id: playlist._id,
                     name: playlist.name,
                     userId: playlist.userId,
                     public: playlist.public,
-                    musicsId: playlist.musicsId,
+                    musics: playlist.musics,
                     image_path: playlist.image_path,
                 }
             });
