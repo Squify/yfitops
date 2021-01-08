@@ -56,7 +56,7 @@ class Menu extends Component {
                                 <Nav.Item href="#10">Playlists publiques</Nav.Item>
                                 {
                                     this.state.publicPlaylists.map(function (playlist, i) {
-                                        return <NavLink key={i} to={`/playlist/${playlist.name}`}
+                                        return <NavLink key={i} to={`/playlist/${playlist._id}`}
                                                         className="nav-link">{playlist.name}</NavLink>
                                     })
                                 }
@@ -64,7 +64,7 @@ class Menu extends Component {
                                 <Nav.Item href="#9">Playlists privées</Nav.Item>
                                 {
                                     this.state.privatePlaylists.map(function (playlist, i) {
-                                        return <NavLink key={i} to={`/playlist/${playlist.name}`}
+                                        return <NavLink key={i} to={`/playlist/${playlist._id}`}
                                                         className="nav-link">{playlist.name}</NavLink>
                                     })
                                 }
