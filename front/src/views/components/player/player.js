@@ -8,7 +8,7 @@ export default class Player extends Component {
         let {sound_path} = this.props
         return (
             <ReactAudioPlayer
-            src={sound_path}
+            src={`${process.env.REACT_APP_HOST_API}/${sound_path}`}
             autoPlay
             controls
             />
