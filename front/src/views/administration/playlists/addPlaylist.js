@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MusicService from "../../../services/music.service";
-import {Col, Row} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import PlaylistService from "../../../services/playlist.service";
 
 export default class AddPlaylist extends Component {
@@ -9,48 +9,53 @@ export default class AddPlaylist extends Component {
         super(props);
         this.state = {
             name: null,
-            public: null,
-            musicsId: [],
-            image_path: null,
-
-            musics: [],
+            isPublic: null,
+            image_path: null
         }
     }
 
     async componentDidMount() {
-        try {
-            let response = await MusicService.getMusics();
-            this.setState({
-                musics: response,
-            });
-        } catch (e) {
-            console.error(e);
-        }
+        // try {
+        //     let response = await MusicService.getMusics();
+        //     this.setState({
+        //         musicsList: response.data.musics,
+        //     });
+        // } catch (e) {
+        //     console.error(e);
+        // }
     }
 
     handleChange(e) {
-        console.log(e.target.id, e.target.value)
         this.setState({
             [e.target.id]: e.target.value
         });
+        console.log(this.state[e.target.id]);
     }
 
-    handleChangeSelect(e) {
-        let value = Array.from(e.target.selectedOptions, option => option.value);
-        this.setState({[e.target.id]: value});
+    handleChangeCheckbox(e) {
+        this.setState({
+            isPublic: e.target.checked
+        });
+    }
+
+    handleChangeImage(e) {
+        this.setState({
+            image_path: e.target.files[0]
+        });
     }
 
     async submit(e) {
         e.preventDefault();
 
-        let formData = new FormData();
-        formData.append('name', this.state.name);
-        formData.append('musicsId', this.state.musicsId);
-        formData.append('image_path', this.state.image_path);
-        formData.append('public', this.state.public);
+        let { name, image_path, isPublic } = this.state;
+
+        let body = new FormData();
+        body.append('name', name);
+        body.append('image_path', image_path);
+        body.append('public', isPublic);
 
         try {
-            await PlaylistService.create(formData);
+            await PlaylistService.create(body);
             this.props.history.push('/admin/playlists');
         } catch (e) {
             console.error(e);
@@ -58,22 +63,34 @@ export default class AddPlaylist extends Component {
     }
 
     render() {
-        let {musics} = this.state;
         return <div className="form-content">
             <h2>Formulaire d'ajout de playlist</h2>
-            <hr className="hr-form"/>
+            <hr className="hr-form" />
             <form onSubmit={(e) => this.submit(e)}>
-                <div className="form-group">
-                    <label>Nom</label>
-                    <input type="text" id="name" required className="form-control"
-                           onChange={(e) => this.handleChange(e)}/>
-                </div>
                 <Row>
-                    <Col>
+                    <Col xs={12}>
+                        <div className="form-group">
+                            <label>Nom</label>
+                            <input type="text" id="name" required className="form-control"
+                                onChange={(e) => this.handleChange(e)} />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12}>
+                        <div className="form-group">
+                            <label>Image path</label>
+                            <input type="file" id="image_path" required className="form-control"
+                                onChange={(e) => this.handleChangeImage(e)} />
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    {/* <Col>
                         <div className="form-group">
                             <label>Musiques</label>
                             <select id="musicsId" required className="form-control" multiple={true}
-                                    onChange={(e) => this.handleChangeSelect(e)}>
+                                onChange={(e) => this.handleChangeSelect(e)}>
                                 {
                                     musics.map((music, index) => {
                                         return <option key={index} value={music._id}>{music.name}</option>
@@ -81,24 +98,20 @@ export default class AddPlaylist extends Component {
                                 }
                             </select>
                         </div>
-                    </Col>
-                    <Col xs={3}>
-                        <div className="form-group">
-                            <label>Public</label>
-                            <input type="checkbox" id="public" className="form-control"
-                                   onChange={(e) => this.handleChange(e)}/>
-                        </div>
+                    </Col> */}
+                    {/* <Col xs={6}> */}
+                    <Col xs={12}>
+                    <div className="form-check">
+                        <input type="checkbox" id="isPublic" className="form-check-input"
+                            onChange={(e) => this.handleChangeCheckbox(e)} />
+                        <label className="form-check-label">Public</label>
+                    </div>
                     </Col>
                 </Row>
-                <div className="form-group">
-                    <label>Sound path</label>
-                    <input type="text" id="image_path" required className="form-control"
-                           onChange={(e) => this.handleChange(e)}/>
-                </div>
 
-                <button type="submit" className="btn btn-primary">Ajouter</button>
+            <button type="submit" style={{marginTop: "25px"}} className="btn btn-primary">Ajouter</button>
             </form>
 
-        </div>
+        </div >
     }
 }

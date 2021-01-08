@@ -33,7 +33,7 @@ export default class Homepage extends Component {
                     {
                         this.state.recentPlaylists ?
                             this.state.recentPlaylists.map(function (playlist, i) {
-                                return <Link className={"playlist-card"} to={`/playlist/${playlist.name}`}
+                                return <Link className={"playlist-card"} to={`/playlist/${playlist._id}`}
                                              key={`recent-playlist-${playlist.id}`}>
                                     <PlaylistCard name={playlist.name} listening={playlist.listening}
                                                   image={playlist.image_path} className="col-4"
@@ -51,8 +51,8 @@ export default class Homepage extends Component {
                     {
                         this.state.popularPlaylists ?
                             this.state.popularPlaylists.map(function (playlist, i) {
-                                return <Link className={"playlist-card"} to={`/playlist/${playlist.name}`}
-                                             key={`popular-playlist-${playlist.id}`}>
+                                return <Link className={"playlist-card"} to={`/playlist/${playlist._id}`}
+                                             key={`popular-playlist-${playlist._id}`}>
                                     <PlaylistCard name={playlist.name} listening={playlist.listening}
                                                   image={playlist.image_path} className="col-4"
                                     />
